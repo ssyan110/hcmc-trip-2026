@@ -269,7 +269,7 @@ const FOOD_MENU = [
   { name: "煉乳咖啡", vn: "Cà Phê Sữa Đá", icon: "☕", price: 45000, desc: "越南必喝！非常甜也非常濃，冰塊融化後剛好。" },
   { name: "椰子咖啡", vn: "Cốt Dừa Cà Phê", icon: "🥥", price: 65000, desc: "Cong Cafe 招牌，像椰子冰沙加咖啡，超消暑。" },
   { name: "甘蔗汁", vn: "Nước Mía", icon: "🥤", price: 10000, desc: "路邊常見，通常會加一顆金桔，微酸很解渴。" },
-  { name: "煎班燒", vn: "Bánh Xèo", icon: "🌮", price: 80000, desc: "越南蛋餅，黃色脆皮包豆芽蝦仁，用生菜包著吃。" },
+  { name: "越南煎餅", vn: "Bánh Xèo", icon: "🌮", price: 80000, desc: "越南煎餅，黃色脆皮包豆芽蝦仁，用生菜包著吃。" },
 ];
 
 // --- 行李清單 ---
@@ -372,7 +372,7 @@ const PackingList = () => {
 };
 
 // ==========================================
-// 3. 主程式
+// 4. 主程式
 // ==========================================
 
 export default function App() {
@@ -397,10 +397,10 @@ export default function App() {
         <div className="max-w-md mx-auto flex justify-between items-center">
           <div>
             <h1 className="font-bold text-xl flex items-center gap-2 tracking-tight">
-              <Plane className="w-5 h-5 transform -rotate-45 text-teal-300" /> 胡志明親子團
+              <Plane className="w-5 h-5 transform -rotate-45 text-teal-300" /> 胡志明自由行
             </h1>
             <div className="flex items-center gap-2 text-xs text-teal-100/80 mt-0.5">
-              <Calendar className="w-3 h-3"/> 2026/3/17-21 <span className="w-1 h-1 bg-teal-300 rounded-full"></span> <Users className="w-3 h-3"/> 9人
+              <Calendar className="w-3 h-3"/> 2026/3/17-21 <span className="w-1 h-1 bg-teal-300 rounded-full"></span> <Users className="w-3 h-3"/> 13人
             </div>
           </div>
           <WeatherWidget />
