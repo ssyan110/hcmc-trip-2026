@@ -3,8 +3,9 @@ import {
   Plane, MapPin, Utensils, ShoppingBag, Calendar, 
   CreditCard, Info, Sun, CloudRain, 
   Languages, Phone, X, Volume2, 
-  Calculator, ChevronRight, Navigation, Map,
-  Users, CheckSquare, Square, Youtube, Bus, Video
+  Calculator, ChevronRight, ChevronDown, Navigation, Map,
+  Users, CheckSquare, Square, Youtube, Bus, Video,
+  AlertTriangle, Banknote, UtensilsCrossed, Shield, BookOpen
 } from 'lucide-react';
 
 // ==========================================
@@ -372,6 +373,292 @@ const PackingList = () => {
 };
 
 // ==========================================
+// Accordion Component
+// ==========================================
+const AccordionSection = ({ title, icon, children, defaultOpen = false }) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  return (
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+      >
+        <div className="flex items-center gap-3">
+          {icon && <span className="text-xl">{icon}</span>}
+          <span className="font-bold text-gray-800">{title}</span>
+        </div>
+        <ChevronDown
+          className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+        />
+      </button>
+      {isOpen && (
+        <div className="px-5 pb-5 border-t border-gray-100 pt-4 animate-fade-in">
+          {children}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ==========================================
+// Travel Notes Page (旅遊注意事項)
+// ==========================================
+const TravelNotesPage = () => (
+  <div className="animate-fade-in space-y-4">
+    <div className="text-center mb-2">
+      <h2 className="text-xl font-bold text-gray-800">📘 旅遊注意事項</h2>
+      <p className="text-sm text-gray-500">點擊展開各項說明</p>
+    </div>
+
+    {/* 航班資訊 */}
+    <AccordionSection title="航班資訊" icon="✈️">
+      <div className="space-y-4">
+        <div className="bg-teal-50 rounded-xl p-4">
+          <h4 className="font-bold text-teal-700 mb-2">🛫 去程</h4>
+          <p className="text-sm text-gray-700 font-bold">高雄 → 胡志明市</p>
+          <div className="text-sm text-gray-600 mt-1 space-y-0.5">
+            <p>航空公司：VietJet Air｜航班：VJ885</p>
+            <p>日期：2026/03/17</p>
+            <p>起飛 <strong>12:45</strong> 高雄</p>
+            <p>抵達 <strong>14:55</strong> 胡志明 新山一機場 T2</p>
+          </div>
+        </div>
+        <div className="bg-amber-50 rounded-xl p-4">
+          <h4 className="font-bold text-amber-700 mb-2">🛬 回程</h4>
+          <p className="text-sm text-gray-700 font-bold">胡志明市 → 高雄</p>
+          <div className="text-sm text-gray-600 mt-1 space-y-0.5">
+            <p>航空公司：Vietnam Airlines｜航班：VN580</p>
+            <p>日期：2026/03/21</p>
+            <p>起飛 <strong>17:50</strong></p>
+            <p>抵達 <strong>21:45</strong> 高雄</p>
+          </div>
+        </div>
+      </div>
+    </AccordionSection>
+
+    {/* 行李檢查清單 */}
+    <AccordionSection title="行李檢查清單" icon="🧳">
+      <div className="space-y-4">
+        <div>
+          <h4 className="font-bold text-gray-700 mb-2">📄 必備證件</h4>
+          <p className="text-sm text-gray-500 mb-2">出發前確認：</p>
+          <ul className="text-sm text-gray-700 space-y-1">
+            <li>• 護照（有效期限至少六個月）</li>
+            <li>• 簽證（建議列印）</li>
+            <li>• 機票確認單</li>
+            <li>• 旅遊保險</li>
+            <li>• 備用護照照片 2 張</li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-bold text-gray-700 mb-2">👕 服裝建議</h4>
+          <p className="text-sm text-gray-500 mb-1">胡志明市 3 月氣溫：<strong>28°C – 35°C</strong></p>
+          <p className="text-sm text-gray-500 mb-2">建議攜帶：</p>
+          <ul className="text-sm text-gray-700 space-y-1">
+            <li>• 輕便夏季服裝</li>
+            <li>• 薄外套（防曬或冷氣）</li>
+            <li>• 舒適鞋子</li>
+            <li>• 太陽眼鏡</li>
+            <li>• 帽子</li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="font-bold text-gray-700 mb-2">💊 必備藥品</h4>
+          <p className="text-sm text-gray-500 mb-2">建議準備：</p>
+          <ul className="text-sm text-gray-700 space-y-1">
+            <li>• 腸胃藥</li>
+            <li>• 止瀉藥</li>
+            <li>• 感冒藥</li>
+            <li>• 過敏藥</li>
+            <li>• OK繃</li>
+            <li>• 防曬</li>
+            <li>• 濕紙巾</li>
+          </ul>
+        </div>
+      </div>
+    </AccordionSection>
+
+    {/* 入境流程 */}
+    <AccordionSection title="入境流程" icon="🛃">
+      <div className="space-y-3">
+        <p className="text-sm text-gray-700 font-bold">下飛機後：</p>
+        <div className="bg-blue-50 rounded-xl p-4 text-sm text-gray-700 space-y-2">
+          <p><strong>1.</strong> 跟著人群走到移民審查</p>
+          <p><strong>2.</strong> 準備：</p>
+          <ul className="ml-4 space-y-0.5">
+            <li>• 護照</li>
+            <li>• 簽證</li>
+            <li>• 登機證</li>
+          </ul>
+        </div>
+        <p className="text-sm text-gray-700">之後流程：</p>
+        <div className="flex items-center gap-2 text-sm text-teal-700 font-bold bg-teal-50 rounded-xl px-4 py-3">
+          <span>移民審查</span><ChevronRight className="w-4 h-4"/>
+          <span>領行李</span><ChevronRight className="w-4 h-4"/>
+          <span>海關</span>
+        </div>
+        <div className="bg-green-50 rounded-xl p-3 text-sm text-green-800">
+          <p>請走：<strong>🟢 綠色通道 — Nothing to Declare</strong></p>
+        </div>
+      </div>
+    </AccordionSection>
+
+    {/* 當地交通 */}
+    <AccordionSection title="當地交通" icon="🚕">
+      <div className="space-y-4">
+        <div className="bg-green-50 rounded-xl p-4">
+          <h4 className="font-bold text-green-700 mb-2">🟢 Grab（最推薦）</h4>
+          <p className="text-sm text-gray-700">越南版 Uber。</p>
+          <p className="text-sm text-gray-700 mt-1">建議：<strong>提前下載 Grab app</strong></p>
+          <p className="text-sm text-gray-500 mt-1">可以叫：汽車、機車、外送</p>
+        </div>
+        <div>
+          <h4 className="font-bold text-gray-700 mb-2">🚖 計程車</h4>
+          <p className="text-sm text-gray-700">建議品牌：</p>
+          <ul className="text-sm text-gray-700 mt-1 space-y-0.5">
+            <li>• <strong>Vinasun</strong></li>
+            <li>• <strong>Mai Linh</strong></li>
+          </ul>
+          <p className="text-sm text-red-600 mt-1">⚠️ 避免不明計程車。</p>
+        </div>
+        <div className="bg-amber-50 rounded-xl p-4">
+          <h4 className="font-bold text-amber-700 mb-2">🚶 過馬路技巧</h4>
+          <p className="text-sm text-gray-700">胡志明市過馬路方式：</p>
+          <p className="text-sm text-gray-800 font-bold mt-1">慢慢走、不要突然停、不要跑</p>
+          <p className="text-sm text-gray-500 mt-1">機車會繞過行人。</p>
+        </div>
+      </div>
+    </AccordionSection>
+
+    {/* 支付方式 */}
+    <AccordionSection title="支付方式" icon="💳">
+      <div className="space-y-3">
+        <p className="text-sm text-gray-700">越南使用：<strong>越南盾 VND</strong></p>
+        <div className="bg-gray-50 rounded-xl p-4">
+          <p className="text-sm text-gray-700 mb-2">常見面額：</p>
+          <div className="flex flex-wrap gap-2">
+            {['10k', '20k', '50k', '100k', '200k', '500k'].map((v) => (
+              <span key={v} className="text-xs font-bold bg-teal-100 text-teal-700 px-3 py-1 rounded-full">{v}</span>
+            ))}
+          </div>
+        </div>
+        <p className="text-sm text-gray-700">💳 信用卡：大餐廳 / 商場 / 咖啡店可以使用。</p>
+      </div>
+    </AccordionSection>
+
+    {/* 換錢攻略 */}
+    <AccordionSection title="換錢攻略" icon="💰">
+      <div className="space-y-4">
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h4 className="font-bold text-gray-700 mb-1">方法 1：台灣先換</h4>
+          <p className="text-sm text-gray-600">安全但匯率通常較差。</p>
+        </div>
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h4 className="font-bold text-gray-700 mb-1">方法 2：機場換</h4>
+          <p className="text-sm text-gray-600">方便但匯率普通。只建議少量。</p>
+        </div>
+        <div className="bg-green-50 rounded-xl p-4 border border-green-200">
+          <h4 className="font-bold text-green-700 mb-1">方法 3：市區金店換（⭐ 推薦）</h4>
+          <p className="text-sm text-gray-700">胡志明市很多金店可以換錢。</p>
+          <p className="text-sm text-gray-700">匯率通常最好。</p>
+          <div className="mt-2 text-sm text-red-600">
+            <p>⚠️ 注意：</p>
+            <ul className="mt-1 space-y-0.5">
+              <li>• 找人多的店</li>
+              <li>• 不要在路邊找陌生人換錢</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </AccordionSection>
+
+    {/* 飲食注意事項 */}
+    <AccordionSection title="飲食注意事項" icon="🍜">
+      <div className="space-y-3">
+        <div className="bg-blue-50 rounded-xl p-4">
+          <p className="text-sm text-gray-700">🚰 飲水：<strong>只喝瓶裝水。</strong></p>
+          <p className="text-sm text-red-600 mt-1">⚠️ 避免：未開封來源不明的水。</p>
+        </div>
+        <div>
+          <h4 className="font-bold text-gray-700 mb-2">🍽️ 吃東西建議：</h4>
+          <div className="text-sm text-gray-700 space-y-1">
+            <p>✅ 找客人多的店</p>
+            <p>✅ 找 Google 評價好的店</p>
+            <p>❌ 避免完全沒有客人的店</p>
+          </div>
+        </div>
+      </div>
+    </AccordionSection>
+
+    {/* 治安注意事項 */}
+    <AccordionSection title="治安注意事項" icon="🛡️">
+      <div className="space-y-3">
+        <div className="bg-red-50 rounded-xl p-4">
+          <p className="text-sm text-gray-700">胡志明市最常見問題：<strong className="text-red-600">機車搶手機</strong></p>
+          <div className="mt-2 text-sm text-gray-700 space-y-1">
+            <p>⚠️ 避免：</p>
+            <ul className="ml-2 space-y-0.5">
+              <li>• 靠馬路滑手機</li>
+              <li>• 手機拿在外側</li>
+            </ul>
+          </div>
+        </div>
+        <div className="text-sm text-gray-700 space-y-1">
+          <p>🎒 背包建議：<strong>背在前面。</strong></p>
+          <p>💍 避免佩戴：大金項鍊、名錶</p>
+        </div>
+      </div>
+    </AccordionSection>
+
+    {/* 防詐騙指南 */}
+    <AccordionSection title="防詐騙指南" icon="🚨">
+      <div className="space-y-4">
+        <p className="text-sm text-gray-500">常見觀光詐騙：</p>
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h4 className="font-bold text-gray-700 mb-1">🚖 計程車繞路</h4>
+          <p className="text-sm text-gray-600">解法：用 <strong>Grab</strong>。</p>
+        </div>
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h4 className="font-bold text-gray-700 mb-1">👮 假警察</h4>
+          <p className="text-sm text-gray-600">有人可能假裝警察檢查護照。</p>
+          <p className="text-sm text-red-600 mt-1">做法：<strong>拒絕並離開。</strong></p>
+        </div>
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h4 className="font-bold text-gray-700 mb-1">💱 換錢詐騙</h4>
+          <p className="text-sm text-gray-600">避免：街頭換錢。只去：<strong>金店或銀行</strong>。</p>
+        </div>
+        <div className="bg-gray-50 rounded-xl p-4">
+          <h4 className="font-bold text-gray-700 mb-1">💆 按摩店詐騙</h4>
+          <p className="text-sm text-gray-600">有些店會強迫加價、收奇怪費用。</p>
+          <p className="text-sm text-teal-600 mt-1">建議：<strong>先確認價格。</strong></p>
+        </div>
+      </div>
+    </AccordionSection>
+
+    {/* 緊急聯絡資訊 */}
+    <AccordionSection title="緊急聯絡資訊" icon="🆘">
+      <div className="space-y-4">
+        <div className="bg-red-50 rounded-xl p-4">
+          <h4 className="font-bold text-red-700 mb-2">越南緊急電話</h4>
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="bg-white rounded-xl p-3"><p className="text-xl font-bold text-red-600">113</p><p className="text-xs text-gray-500">警察</p></div>
+            <div className="bg-white rounded-xl p-3"><p className="text-xl font-bold text-orange-600">114</p><p className="text-xs text-gray-500">消防</p></div>
+            <div className="bg-white rounded-xl p-3"><p className="text-xl font-bold text-blue-600">115</p><p className="text-xs text-gray-500">救護車</p></div>
+          </div>
+        </div>
+        <div className="bg-blue-50 rounded-xl p-4">
+          <h4 className="font-bold text-blue-700 mb-2">🇹🇼 台北經濟文化辦事處</h4>
+          <div className="text-sm text-gray-700 space-y-1">
+            <p>📞 電話：<strong>+84-28-3822-5757</strong></p>
+            <p>📍 地址：336 Nguyen Tri Phuong Street, District 10, Ho Chi Minh City</p>
+          </div>
+        </div>
+      </div>
+    </AccordionSection>
+  </div>
+);
+
+// ==========================================
 // 4. 主程式
 // ==========================================
 
@@ -534,13 +821,17 @@ export default function App() {
             </div>
           </div>
         )}
+
+        {/* TAB 4: 旅遊注意事項 */}
+        {activeTab === 'travel-notes' && <TravelNotesPage />}
       </main>
 
       {/* 底部導覽 */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 pb-safe pt-2 px-6 flex justify-around md:hidden z-50">
+      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 pb-safe pt-2 px-4 flex justify-around md:hidden z-50">
         <button onClick={() => setActiveTab('itinerary')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'itinerary' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Calendar className="w-6 h-6"/><span className="text-[10px] font-medium">行程</span></button>
         <button onClick={() => setActiveTab('tools')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'tools' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Utensils className="w-6 h-6"/><span className="text-[10px] font-medium">工具/美食</span></button>
         <button onClick={() => setActiveTab('info')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'info' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><ShoppingBag className="w-6 h-6"/><span className="text-[10px] font-medium">清單</span></button>
+        <button onClick={() => setActiveTab('travel-notes')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'travel-notes' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><BookOpen className="w-6 h-6"/><span className="text-[10px] font-medium">注意事項</span></button>
       </div>
 
       {selectedLocation && <TaxiCardModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />}
