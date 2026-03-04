@@ -489,6 +489,9 @@ const TravelNotesPage = () => (
             <li>• 簽證</li>
             <li>• 登機證（很重要）</li>
           </ul>
+          <p className="text-sm text-red-600 mt-1">⚠️ 一定要留好登機證，每個人都必須有上面三項文件。</p>
+          <p className="text-sm text-red-600 mt-1">⚠️ 只要准備好文件，就一定可以過海關，如果遇到海關故意慢吞吞或不做事情， 什麼都別做，不要露出緊張或害怕的表情，只要面無表情的看著他就好。</p>
+          <p className="text-sm text-red-600 mt-1">⚠️ 最後請確認海關有蓋「入境章」。</p>
         </div>
         <p className="text-sm text-gray-700">之後流程：</p>
         <div className="flex items-center gap-2 text-sm text-teal-700 font-bold bg-teal-50 rounded-xl px-4 py-3">
