@@ -694,50 +694,91 @@ export default function App() {
         </div>
       </header>
 
-      <main className="max-w-md mx-auto p-4 space-y-6">
+      <main className="max-w-md mx-auto p-4 space-y-4">
         {/* TAB 1: 行程 */}
         {activeTab === 'itinerary' && (
-          <div className="animate-fade-in space-y-4">
+          <div className="animate-fade-in space-y-3">
             {ITINERARY.map((day) => (
-              <div key={day.day} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className={`p-4 flex justify-between items-center cursor-pointer ${openDay === day.day ? 'bg-teal-50/50' : 'bg-white'}`} onClick={() => setOpenDay(openDay === day.day ? null : day.day)}>
+              <div key={day.day} className="bg-white rounded-3xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+                {/* Day Header */}
+                <button 
+                  onClick={() => setOpenDay(openDay === day.day ? null : day.day)}
+                  className="w-full p-5 flex items-center justify-between active:scale-[0.99] transition-transform"
+                >
                   <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 rounded-2xl flex flex-col items-center justify-center font-bold ${openDay === day.day ? 'bg-teal-600 text-white' : 'bg-gray-100 text-gray-500'}`}><span className="text-[10px] uppercase">Day</span><span className="text-xl leading-none">{day.day}</span></div>
-                    <div><h3 className="font-bold text-gray-800 text-lg">{day.title}</h3><p className="text-xs text-gray-500">{day.date}</p></div>
+                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/20">
+                      <div className="text-center">
+                        <div className="text-[10px] font-semibold text-teal-100 uppercase tracking-wide">Day</div>
+                        <div className="text-2xl font-bold text-white leading-none">{day.day}</div>
+                      </div>
+                    </div>
+                    <div className="flex-1 text-left">
+                      <h3 className="font-semibold text-gray-900 text-base leading-tight mb-0.5">{day.title}</h3>
+                      <p className="text-xs text-gray-400 font-medium">{day.date}</p>
+                      <p className="text-[11px] text-gray-400 mt-0.5">{day.desc}</p>
+                    </div>
                   </div>
-                </div>
-                {openDay === day.day && (
-                  <div className="px-4 pb-6 pt-2 bg-white">
-                    <div className="ml-6 pl-6 border-l-2 border-dashed border-teal-200 space-y-6">
-                      {day.details.map((item, idx) => (
-                        <div key={idx} className="relative pb-2">
-                          <div className="absolute -left-[29px] top-1.5 w-3 h-3 bg-teal-400 rounded-full ring-4 ring-white"></div>
-                          
-                          {/* Time & Title */}
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <span className="text-teal-600 font-bold text-xs bg-teal-50 px-2 py-0.5 rounded-full">{item.time}</span>
-                              <h4 className="font-bold text-gray-800 mt-1">{item.label}</h4>
-                            </div>
-                            {item.costVND !== 0 && (
-                                <div className="text-right">
-                                    <span className="block text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded">
-                                        {item.fixedTwd ? `預計花費：$${item.fixedTwd} TWD` : `預計花費$${Math.round(item.costVND/EXCHANGE_RATE)} TWD`}
-                                    </span>
-                                </div>
-                            )}
-                          </div>
+                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0 ml-2 ${openDay === day.day ? 'rotate-180' : ''}`}/>
+                </button>
 
-                          <p className="text-sm text-gray-500 my-1">{item.note}</p>
+                {/* Day Content */}
+                {openDay === day.day && (
+                  <div className="px-5 pb-5 pt-1 bg-gradient-to-b from-gray-50/50 to-white">
+                    <div className="space-y-5">
+                      {day.details.map((item, idx) => (
+                        <div key={idx} className="relative">
+                          {/* Timeline connector */}
+                          {idx !== day.details.length - 1 && (
+                            <div className="absolute left-[19px] top-10 bottom-0 w-0.5 bg-gradient-to-b from-teal-200 to-transparent"></div>
+                          )}
                           
-                          {/* Action Buttons */}
-                          <div className="flex gap-2 mt-2">
-                             <button onClick={() => openMap(item.mapQuery)} className="flex items-center gap-1 text-[10px] bg-blue-50 text-blue-600 px-2 py-1 rounded border border-blue-100">
-                                <Map className="w-3 h-3" /> 導航
-                             </button>
-                             <button onClick={() => openYoutube(item.ytKeyword)} className="flex items-center gap-1 text-[10px] bg-red-50 text-red-600 px-2 py-1 rounded border border-red-100">
-                                <Youtube className="w-3 h-3" /> 看影片
-                             </button>
+                          {/* Activity Card */}
+                          <div className="flex gap-4">
+                            {/* Time indicator */}
+                            <div className="flex-shrink-0 pt-1">
+                              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-500 shadow-lg shadow-teal-500/25 flex items-center justify-center">
+                                <span className="text-white text-xs font-bold">{item.time.split(':')[0]}<span className="text-[8px]">:{item.time.split(':')[1]}</span></span>
+                              </div>
+                            </div>
+
+                            {/* Content */}
+                            <div className="flex-1 bg-white rounded-2xl p-4 shadow-sm border border-gray-100/50">
+                              {/* Title & Cost */}
+                              <div className="flex justify-between items-start mb-2">
+                                <h4 className="font-semibold text-gray-900 text-[15px] leading-tight flex-1">{item.label}</h4>
+                                {item.costVND !== 0 && (
+                                  <div className="ml-3 flex-shrink-0">
+                                    <div className="text-right">
+                                      <div className="text-xs font-bold text-teal-600">
+                                        ${item.fixedTwd || Math.round(item.costVND/EXCHANGE_RATE)}
+                                      </div>
+                                      <div className="text-[9px] text-gray-400 font-medium">TWD</div>
+                                    </div>
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Description */}
+                              <p className="text-sm text-gray-500 leading-relaxed mb-3">{item.note}</p>
+                              
+                              {/* Action Buttons */}
+                              <div className="flex gap-2">
+                                <button 
+                                  onClick={(e) => { e.stopPropagation(); openMap(item.mapQuery); }} 
+                                  className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-blue-600 px-3 py-1.5 rounded-full hover:bg-blue-50 transition-colors"
+                                >
+                                  <Map className="w-3.5 h-3.5" />
+                                  <span className="font-medium">導航</span>
+                                </button>
+                                <button 
+                                  onClick={(e) => { e.stopPropagation(); openYoutube(item.ytKeyword); }} 
+                                  className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-red-600 px-3 py-1.5 rounded-full hover:bg-red-50 transition-colors"
+                                >
+                                  <Youtube className="w-3.5 h-3.5" />
+                                  <span className="font-medium">影片</span>
+                                </button>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       ))}
