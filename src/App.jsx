@@ -876,7 +876,7 @@ export default function App() {
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 pb-safe pt-2 px-4 flex justify-around md:hidden z-50">
         <button onClick={() => setActiveTab('itinerary')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'itinerary' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Calendar className="w-6 h-6"/><span className="text-[10px] font-medium">行程</span></button>
         <button onClick={() => setActiveTab('tools')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'tools' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Utensils className="w-6 h-6"/><span className="text-[10px] font-medium">工具/美食</span></button>
-        <button onClick={() => setActiveTab('info')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'info' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><ShoppingBag className="w-6 h-6"/><span className="text-[10px] font-medium">建議行李清單</span></button>
+        <button onClick={() => setActiveTab('info')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'info' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><ShoppingBag className="w-6 h-6"/><span className="text-[10px] font-medium">行李建議</span></button>
         <button onClick={() => setActiveTab('travel-notes')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'travel-notes' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><BookOpen className="w-6 h-6"/><span className="text-[10px] font-medium">注意事項</span></button>
       </div>
 
