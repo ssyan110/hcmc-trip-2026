@@ -417,7 +417,7 @@ const TravelNotesPage = () => (
           <h4 className="font-bold text-teal-700 mb-2">🛫 去程</h4>
           <p className="text-sm text-gray-700 font-bold">高雄 → 胡志明市</p>
           <div className="text-sm text-gray-600 mt-1 space-y-0.5">
-            <p>航空公司：VietJet Air｜航班：VJ885</p>
+            <p>航空公司：越捷航空VietJet Air｜航班：VJ885</p>
             <p>日期：2026/03/17</p>
             <p>起飛 <strong>12:45</strong> 高雄</p>
             <p>抵達 <strong>14:55</strong> 胡志明 新山一機場 T2</p>
@@ -427,7 +427,7 @@ const TravelNotesPage = () => (
           <h4 className="font-bold text-amber-700 mb-2">🛬 回程</h4>
           <p className="text-sm text-gray-700 font-bold">胡志明市 → 高雄</p>
           <div className="text-sm text-gray-600 mt-1 space-y-0.5">
-            <p>航空公司：Vietnam Airlines｜航班：VN580</p>
+            <p>航空公司：越南航空 Vietnam Airlines｜航班：VN580</p>
             <p>日期：2026/03/21</p>
             <p>起飛 <strong>17:50</strong></p>
             <p>抵達 <strong>21:45</strong> 高雄</p>
@@ -445,19 +445,19 @@ const TravelNotesPage = () => (
           <ul className="text-sm text-gray-700 space-y-1">
             <li>• 護照（有效期限至少六個月）</li>
             <li>• 簽證（建議列印）</li>
-            <li>• 機票確認單</li>
-            <li>• 旅遊保險</li>
+            <li>• 機票確認單（建議列印）</li>
+            <li>• 旅遊保險（建議列印保險證明）</li>
             <li>• 備用護照照片 2 張</li>
           </ul>
         </div>
         <div>
           <h4 className="font-bold text-gray-700 mb-2">👕 服裝建議</h4>
-          <p className="text-sm text-gray-500 mb-1">胡志明市 3 月氣溫：<strong>28°C – 35°C</strong></p>
+          <p className="text-sm text-gray-500 mb-1">胡志明市 3 月氣溫：<strong>28°C – 35°C</strong>，有可能悶熱潮濕。</p>
           <p className="text-sm text-gray-500 mb-2">建議攜帶：</p>
           <ul className="text-sm text-gray-700 space-y-1">
             <li>• 輕便夏季服裝</li>
-            <li>• 薄外套（防曬或冷氣）</li>
-            <li>• 舒適鞋子</li>
+            <li>• 薄外套（防曬或突然進冷氣房）</li>
+            <li>• 防曬用品</li>
             <li>• 太陽眼鏡</li>
             <li>• 帽子</li>
           </ul>
@@ -467,11 +467,10 @@ const TravelNotesPage = () => (
           <p className="text-sm text-gray-500 mb-2">建議準備：</p>
           <ul className="text-sm text-gray-700 space-y-1">
             <li>• 腸胃藥</li>
-            <li>• 止瀉藥</li>
             <li>• 感冒藥</li>
-            <li>• 過敏藥</li>
+            <li>• 個人常用藥</li>
             <li>• OK繃</li>
-            <li>• 防曬</li>
+            <li>• 防曬用品</li>
             <li>• 濕紙巾</li>
           </ul>
         </div>
@@ -488,14 +487,14 @@ const TravelNotesPage = () => (
           <ul className="ml-4 space-y-0.5">
             <li>• 護照</li>
             <li>• 簽證</li>
-            <li>• 登機證</li>
+            <li>• 登機證（很重要）</li>
           </ul>
         </div>
         <p className="text-sm text-gray-700">之後流程：</p>
         <div className="flex items-center gap-2 text-sm text-teal-700 font-bold bg-teal-50 rounded-xl px-4 py-3">
           <span>移民審查</span><ChevronRight className="w-4 h-4"/>
           <span>領行李</span><ChevronRight className="w-4 h-4"/>
-          <span>海關</span>
+          <span>走出海關</span>
         </div>
         <div className="bg-green-50 rounded-xl p-3 text-sm text-green-800">
           <p>請走：<strong>🟢 綠色通道 — Nothing to Declare</strong></p>
@@ -509,7 +508,7 @@ const TravelNotesPage = () => (
         <div className="bg-green-50 rounded-xl p-4">
           <h4 className="font-bold text-green-700 mb-2">🟢 Grab（最推薦）</h4>
           <p className="text-sm text-gray-700">越南版 Uber。</p>
-          <p className="text-sm text-gray-700 mt-1">建議：<strong>提前下載 Grab app</strong></p>
+          <p className="text-sm text-gray-700 mt-1">建議：<strong>提前下載 Grab app，並綁定好信用卡。</strong></p>
           <p className="text-sm text-gray-500 mt-1">可以叫：汽車、機車、外送</p>
         </div>
         <div>
@@ -519,7 +518,7 @@ const TravelNotesPage = () => (
             <li>• <strong>Vinasun</strong></li>
             <li>• <strong>Mai Linh</strong></li>
           </ul>
-          <p className="text-sm text-red-600 mt-1">⚠️ 避免不明計程車。</p>
+          <p className="text-sm text-red-600 mt-1">⚠️ 避免不明計程車，絕對不要接受主動來招攬客人的人。</p>
         </div>
         <div className="bg-amber-50 rounded-xl p-4">
           <h4 className="font-bold text-amber-700 mb-2">🚶 過馬路技巧</h4>
@@ -537,12 +536,13 @@ const TravelNotesPage = () => (
         <div className="bg-gray-50 rounded-xl p-4">
           <p className="text-sm text-gray-700 mb-2">常見面額：</p>
           <div className="flex flex-wrap gap-2">
-            {['10k', '20k', '50k', '100k', '200k', '500k'].map((v) => (
+            {['10k(約12台幣)', '20k(約24台幣)', '50k(約60台幣)', '100k(約120台幣)', '200k(約240台幣)', '500k(約600台幣)'].map((v) => (
               <span key={v} className="text-xs font-bold bg-teal-100 text-teal-700 px-3 py-1 rounded-full">{v}</span>
             ))}
           </div>
         </div>
         <p className="text-sm text-gray-700">💳 信用卡：大餐廳 / 商場 / 咖啡店可以使用。</p>
+        <p className="text-sm text-red-600 mt-1">⚠️ 需特別特別注意越盾「兩萬」和「五十萬」的紙鈔！</p>
       </div>
     </AccordionSection>
 
@@ -551,11 +551,11 @@ const TravelNotesPage = () => (
       <div className="space-y-4">
         <div className="bg-gray-50 rounded-xl p-4">
           <h4 className="font-bold text-gray-700 mb-1">方法 1：台灣先換</h4>
-          <p className="text-sm text-gray-600">安全但匯率通常較差。</p>
+          <p className="text-sm text-gray-600">安全但匯率通常很差。</p>
         </div>
         <div className="bg-gray-50 rounded-xl p-4">
           <h4 className="font-bold text-gray-700 mb-1">方法 2：機場換</h4>
-          <p className="text-sm text-gray-600">方便但匯率普通。只建議少量。</p>
+          <p className="text-sm text-gray-600">方便但匯率較差。只建議少量。</p>
         </div>
         <div className="bg-green-50 rounded-xl p-4 border border-green-200">
           <h4 className="font-bold text-green-700 mb-1">方法 3：市區金店換（⭐ 推薦）</h4>
@@ -569,6 +569,7 @@ const TravelNotesPage = () => (
             </ul>
           </div>
         </div>
+        <p className="text-sm text-gray-700">ℹ️ 推薦金店：https://share.google/SWm0ZalzGRY2asAQo</p>
       </div>
     </AccordionSection>
 
@@ -577,14 +578,16 @@ const TravelNotesPage = () => (
       <div className="space-y-3">
         <div className="bg-blue-50 rounded-xl p-4">
           <p className="text-sm text-gray-700">🚰 飲水：<strong>只喝瓶裝水。</strong></p>
-          <p className="text-sm text-red-600 mt-1">⚠️ 避免：未開封來源不明的水。</p>
+          <p className="text-sm text-red-600 mt-1">⚠️ 避免：未開封來源不明的水或飲料。</p>
         </div>
         <div>
           <h4 className="font-bold text-gray-700 mb-2">🍽️ 吃東西建議：</h4>
           <div className="text-sm text-gray-700 space-y-1">
             <p>✅ 找客人多的店</p>
             <p>✅ 找 Google 評價好的店</p>
+            <p>✅ 可以在超商先買優格吃，讓肚子習慣當地的菌</p>
             <p>❌ 避免完全沒有客人的店</p>
+            <p>❌ 避免太過當地的店</p>
           </div>
         </div>
       </div>
@@ -594,18 +597,21 @@ const TravelNotesPage = () => (
     <AccordionSection title="治安注意事項" icon="🛡️">
       <div className="space-y-3">
         <div className="bg-red-50 rounded-xl p-4">
-          <p className="text-sm text-gray-700">胡志明市最常見問題：<strong className="text-red-600">機車搶手機</strong></p>
+          <p className="text-sm text-gray-700">胡志明市最常見的大問題：<strong className="text-red-600">機車黨搶手機</strong></p>
           <div className="mt-2 text-sm text-gray-700 space-y-1">
-            <p>⚠️ 避免：</p>
+            <p>⚠️ 強烈建議應避免：</p>
             <ul className="ml-2 space-y-0.5">
-              <li>• 靠馬路滑手機</li>
+              <li>• 在馬路上滑手機</li>
               <li>• 手機拿在外側</li>
+              <li>• 邊走邊用手機</li>
+              <li>• 用手機繩</li>
+              <li>• 拿著手機走來走去</li>
             </ul>
           </div>
         </div>
         <div className="text-sm text-gray-700 space-y-1">
-          <p>🎒 背包建議：<strong>背在前面。</strong></p>
-          <p>💍 避免佩戴：大金項鍊、名錶</p>
+          <p>🎒 背包建議：<strong>背在後面沒關係，但別放貴重物品。進入人多的地方再背到前面，但需要同時注意褲子和外套口袋。</strong></p>
+          <p>💍 避免佩戴：大金項鍊、名錶、看起來很貴的飾品</p>
         </div>
       </div>
     </AccordionSection>
@@ -616,12 +622,12 @@ const TravelNotesPage = () => (
         <p className="text-sm text-gray-500">常見觀光詐騙：</p>
         <div className="bg-gray-50 rounded-xl p-4">
           <h4 className="font-bold text-gray-700 mb-1">🚖 計程車繞路</h4>
-          <p className="text-sm text-gray-600">解法：用 <strong>Grab</strong>。</p>
+          <p className="text-sm text-gray-600">解法：只用 <strong>Grab</strong>訂車。</p>
         </div>
         <div className="bg-gray-50 rounded-xl p-4">
-          <h4 className="font-bold text-gray-700 mb-1">👮 假警察</h4>
-          <p className="text-sm text-gray-600">有人可能假裝警察檢查護照。</p>
-          <p className="text-sm text-red-600 mt-1">做法：<strong>拒絕並離開。</strong></p>
+          <h4 className="font-bold text-gray-700 mb-1">💲 被商家宰</h4>
+          <p className="text-sm text-gray-600">有些小店家可能會因為觀光客而抬高價格。</p>
+          <p className="text-sm text-red-600 mt-1">做法：<strong>永遠記得，一定要先問價格，並用手機/計算機按出來。這裡可能會按200，表示200K（20萬越盾）；50表示50K（5萬越盾），以此類推。</strong></p>
         </div>
         <div className="bg-gray-50 rounded-xl p-4">
           <h4 className="font-bold text-gray-700 mb-1">💱 換錢詐騙</h4>
@@ -630,7 +636,7 @@ const TravelNotesPage = () => (
         <div className="bg-gray-50 rounded-xl p-4">
           <h4 className="font-bold text-gray-700 mb-1">💆 按摩店詐騙</h4>
           <p className="text-sm text-gray-600">有些店會強迫加價、收奇怪費用。</p>
-          <p className="text-sm text-teal-600 mt-1">建議：<strong>先確認價格。</strong></p>
+          <p className="text-sm text-teal-600 mt-1">建議：<strong>先確認價格。</strong>，絕對不要去門口被遮起來，或完全沒辦法從外面看到內部的店家。</p>
         </div>
       </div>
     </AccordionSection>
@@ -854,10 +860,9 @@ export default function App() {
             <PackingList />
             
             <div className="bg-red-50 rounded-2xl shadow-sm p-5 border border-red-100">
-              <h2 className="font-bold text-red-700 mb-2 flex items-center gap-2"><Phone className="w-5 h-5"/> 緊急聯絡</h2>
+              <h2 className="font-bold text-red-700 mb-2 flex items-center gap-2">注意</h2>
               <div className="text-sm space-y-2 text-red-800">
-                <p><strong>駐胡志明辦事處：</strong> +84-903-927019</p>
-                <p><strong>報警：</strong> 113 / <strong>救護車：</strong> 115</p>
+                <p>請依照個人需求準備行李，特別是醫藥品、清潔用品、過敏藥等等。</p>
               </div>
             </div>
           </div>
@@ -871,7 +876,7 @@ export default function App() {
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 pb-safe pt-2 px-4 flex justify-around md:hidden z-50">
         <button onClick={() => setActiveTab('itinerary')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'itinerary' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Calendar className="w-6 h-6"/><span className="text-[10px] font-medium">行程</span></button>
         <button onClick={() => setActiveTab('tools')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'tools' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Utensils className="w-6 h-6"/><span className="text-[10px] font-medium">工具/美食</span></button>
-        <button onClick={() => setActiveTab('info')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'info' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><ShoppingBag className="w-6 h-6"/><span className="text-[10px] font-medium">清單</span></button>
+        <button onClick={() => setActiveTab('info')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'info' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><ShoppingBag className="w-6 h-6"/><span className="text-[10px] font-medium">建議行李清單</span></button>
         <button onClick={() => setActiveTab('travel-notes')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'travel-notes' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><BookOpen className="w-6 h-6"/><span className="text-[10px] font-medium">注意事項</span></button>
       </div>
 
