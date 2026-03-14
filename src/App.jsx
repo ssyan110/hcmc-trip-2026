@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Plane, MapPin, Utensils, ShoppingBag, Calendar, 
-  CreditCard, Info, Sun, CloudRain, 
-  Languages, Phone, X, Volume2, 
+import {
+  Plane, MapPin, Utensils, ShoppingBag, Calendar,
+  CreditCard, Info, Sun, CloudRain,
+  Languages, Phone, X, Volume2,
   Calculator, ChevronRight, ChevronDown, Navigation, Map,
   Users, CheckSquare, Square, Youtube, Bus, Video,
   AlertTriangle, Banknote, UtensilsCrossed, Shield, BookOpen
@@ -17,7 +17,7 @@ const EXCHANGE_RATE = 850; // 1 TWD = 850 VND
 const formatPrice = (vnd, isFixedTwd = null) => {
   if (vnd === 0) return "免費";
   const twd = isFixedTwd || Math.round(vnd / EXCHANGE_RATE);
-  return `${(vnd/1000).toFixed(0)}k VND (約 $${twd})`;
+  return `${(vnd / 1000).toFixed(0)}k VND (約 $${twd})`;
 };
 
 // 輔助函式：Youtube 搜尋連結
@@ -36,35 +36,35 @@ const ITINERARY = [
     title: "抵達 & 市區初探",
     desc: "VJ885 • 飯店入住 • 越式晚餐",
     details: [
-      { 
-        time: "14:55", 
-        label: "抵達胡志明 (VJ885)", 
-        note: "預約接送：訂Grab。入境約 1.5hr", 
-        costVND: 200000, 
+      {
+        time: "14:55",
+        label: "抵達胡志明 (VJ885)",
+        note: "預約接送：訂Grab。入境約 1.5hr",
+        costVND: 200000,
         mapQuery: "Tan Son Nhat International Terminal",
         ytKeyword: "新山一機場 入境"
       },
-      { 
-        time: "17:00", 
-        label: "飯店 Check-in", 
-        note: "第一郡/第四郡 • 稍作休息", 
-        costVND: 0, 
+      {
+        time: "17:00",
+        label: "飯店 Check-in",
+        note: "第一郡/第四郡 • 稍作休息",
+        costVND: 0,
         mapQuery: "District 1 Ho Chi Minh City",
         ytKeyword: "胡志明第一郡飯店"
       },
-      { 
-        time: "18:30", 
-        label: "晚餐：Nha Hang Ngon", 
-        note: "集結各式小吃，環境好。人均約 300 台幣", 
-        costVND: 250000, 
+      {
+        time: "18:30",
+        label: "晚餐：Nha Hang Ngon",
+        note: "集結各式小吃，環境好。人均約 300 台幣",
+        costVND: 250000,
         mapQuery: "Nha Hang Ngon 160 Pasteur",
         ytKeyword: "Nha Hang Ngon 胡志明"
       },
-      { 
-        time: "20:30", 
-        label: "阮惠街步行廣場", 
-        note: "看胡志明銅像、市政廳夜景，很寬敞", 
-        costVND: 0, 
+      {
+        time: "20:30",
+        label: "阮惠街步行廣場",
+        note: "看胡志明銅像、市政廳夜景，很寬敞",
+        costVND: 0,
         mapQuery: "Nguyen Hue Walking Street",
         ytKeyword: "阮惠街步行街"
       }
@@ -76,43 +76,43 @@ const ITINERARY = [
     title: "地標巡禮 & 遊船晚餐",
     desc: "粉紅教堂 • 書街 • 西貢河夜景",
     details: [
-      { 
-        time: "08:00", 
-        label: "早餐：越南河粉", 
-        note: "推薦：Pho Hoa 或 飯店早餐", 
-        costVND: 70000, 
+      {
+        time: "08:00",
+        label: "早餐：越南河粉",
+        note: "推薦：Pho Hoa 或 飯店早餐",
+        costVND: 70000,
         mapQuery: "Pho Hoa Pasteur",
         ytKeyword: "胡志明 河粉 推薦"
       },
-      { 
-        time: "09:30", 
-        label: "市區地標散步", 
-        note: "紅教堂、郵局、書街 (點都很近)", 
-        costVND: 0, 
+      {
+        time: "09:30",
+        label: "市區地標散步",
+        note: "紅教堂、郵局、書街 (點都很近)",
+        costVND: 0,
         mapQuery: "Saigon Central Post Office",
         ytKeyword: "胡志明 中央郵局 書街"
       },
-      { 
-        time: "12:00", 
-        label: "午餐：Secret Garden", 
-        note: "頂樓花園餐廳，氣氛佳家常菜", 
-        costVND: 180000, 
+      {
+        time: "12:00",
+        label: "午餐：Secret Garden",
+        note: "頂樓花園餐廳，氣氛佳家常菜",
+        costVND: 180000,
         mapQuery: "Secret Garden Restaurant Pasteur",
         ytKeyword: "Secret Garden 胡志明"
       },
-      { 
-        time: "13:30", 
-        label: "粉紅教堂 & 椰子咖啡", 
-        note: "Tan Dinh Church • 對面喝 Cong Cafe", 
-        costVND: 65000, 
+      {
+        time: "13:30",
+        label: "粉紅教堂 & 椰子咖啡",
+        note: "Tan Dinh Church • 對面喝 Cong Cafe",
+        costVND: 65000,
         mapQuery: "Tan Dinh Church",
         ytKeyword: "粉紅教堂 胡志明"
       },
-      { 
-        time: "18:30", 
-        label: "西貢河遊船晚餐", 
-        note: "Indochina Queen • 船上自助餐看夜景", 
-        costVND: 500000, 
+      {
+        time: "18:30",
+        label: "西貢河遊船晚餐",
+        note: "Indochina Queen • 船上自助餐看夜景",
+        costVND: 650000,
         mapQuery: "Indochina Queen",
         ytKeyword: "西貢河遊船晚餐"
       }
@@ -124,43 +124,43 @@ const ITINERARY = [
     title: "湄公河深度一日遊",
     desc: "美托 & 檳知 • 獨角獸島 • 永長寺",
     details: [
-      { 
-        time: "07:30", 
-        label: "專車接送出發", 
-        note: "第1郡飯店上車，前往美托", 
-        costVND: 550000, 
+      {
+        time: "07:30",
+        label: "專車接送出發",
+        note: "第1郡飯店上車，前往美托",
+        costVND: 550000,
         mapQuery: "District 1 Ho Chi Minh City",
         ytKeyword: "美托一日遊"
       },
-      { 
-        time: "10:30", 
-        label: "獨角獸島生態體驗", 
-        note: "養蜂場、蜂蜜茶、與蟒蛇合照", 
+      {
+        time: "10:30",
+        label: "獨角獸島生態體驗",
+        note: "養蜂場、蜂蜜茶、與蟒蛇合照",
         costVND: 0, // 含在團費
         mapQuery: "Thoi Son Island",
         ytKeyword: "湄公河 獨角獸島"
       },
-      { 
-        time: "11:00", 
-        label: "椰子糖工坊 & 民歌", 
-        note: "觀看製作、試吃、聽 Don Ca Tai Tu", 
+      {
+        time: "11:00",
+        label: "椰子糖工坊 & 民歌",
+        note: "觀看製作、試吃、聽 Don Ca Tai Tu",
         costVND: 0, // 含在團費
         mapQuery: "Ben Tre Coconut Candy",
         ytKeyword: "越南 椰子糖工廠"
       },
-      { 
-        time: "12:30", 
-        label: "午餐：鳳凰島 (Ben Tre)", 
-        note: "享用特色餐 (團費包含)", 
+      {
+        time: "12:30",
+        label: "午餐：鳳凰島 (Ben Tre)",
+        note: "享用特色餐 (團費包含)",
         costVND: 0,
         mapQuery: "Con Phung",
         ytKeyword: "湄公河 鳳凰島"
       },
-      { 
-        time: "15:00", 
-        label: "參觀永長寺", 
-        note: "前江省最大寺廟，中法混血風格", 
-        costVND: 0, 
+      {
+        time: "15:00",
+        label: "參觀永長寺",
+        note: "前江省最大寺廟，中法混血風格",
+        costVND: 0,
         mapQuery: "Vinh Trang Pagoda",
         ytKeyword: "永長寺"
       }
@@ -172,43 +172,43 @@ const ITINERARY = [
     title: "華人區 & 動物園",
     desc: "第五郡美食 • 親子動物園 • 巴士",
     details: [
-      { 
-        time: "08:30", 
-        label: "早餐：九龍冰室", 
-        note: "港式點心，體驗堤岸華人文化", 
-        costVND: 300000, 
+      {
+        time: "08:30",
+        label: "早餐：九龍冰室",
+        note: "港式點心，體驗堤岸華人文化",
+        costVND: 300000,
         mapQuery: "Kowloon Bing Sutt Ho Chi Minh",
         ytKeyword: "胡志明 九龍冰室"
       },
-      { 
-        time: "09:30", 
-        label: "天后宮 & 平西市場", 
-        note: "香火鼎盛媽祖廟 • 批發市場", 
-        costVND: 0, 
+      {
+        time: "09:30",
+        label: "天后宮 & 平西市場",
+        note: "香火鼎盛媽祖廟 • 批發市場",
+        costVND: 0,
         mapQuery: "Thien Hau Temple",
         ytKeyword: "胡志明 天后宮"
       },
-      { 
-        time: "12:00", 
-        label: "午餐：東源雞飯", 
-        note: "海南雞飯，醬料一絕", 
-        costVND: 150000, 
+      {
+        time: "12:00",
+        label: "午餐：東源雞飯",
+        note: "海南雞飯，醬料一絕",
+        costVND: 150000,
         mapQuery: "Com Ga Dong Nguyen",
         ytKeyword: "東源雞飯"
       },
-      { 
-        time: "14:30", 
-        label: "西貢動物園", 
-        note: "門票便宜，可餵長頸鹿", 
-        costVND: 60000, 
+      {
+        time: "14:30",
+        label: "西貢動物園",
+        note: "門票便宜，可餵長頸鹿",
+        costVND: 60000,
         mapQuery: "Saigon Zoo and Botanical Garden",
         ytKeyword: "西貢動物園"
       },
-      { 
-        time: "19:00", 
-        label: "雙層觀光巴士", 
-        note: "兜風看夜景 (歌劇院旁搭車)", 
-        costVND: 150000, 
+      {
+        time: "19:00",
+        label: "雙層觀光巴士",
+        note: "兜風看夜景 (歌劇院旁搭車)",
+        costVND: 150000,
         mapQuery: "Saigon Opera House",
         ytKeyword: "胡志明 雙層巴士"
       }
@@ -220,27 +220,27 @@ const ITINERARY = [
     title: "早午餐 & 返家",
     desc: "咖啡公寓 • 最後衝刺 • 機場",
     details: [
-      { 
-        time: "09:30", 
-        label: "咖啡公寓 / 早午餐", 
-        note: "42 Nguyen Hue • 拍照打卡", 
-        costVND: 100000, 
+      {
+        time: "09:30",
+        label: "咖啡公寓 / 早午餐",
+        note: "42 Nguyen Hue • 拍照打卡",
+        costVND: 100000,
         mapQuery: "The Cafe Apartment",
         ytKeyword: "咖啡公寓 胡志明"
       },
-      { 
-        time: "11:30", 
-        label: "最後採買 & 午餐", 
-        note: "把越盾花完", 
-        costVND: 0, 
+      {
+        time: "11:30",
+        label: "最後採買 & 午餐",
+        note: "把越盾花完",
+        costVND: 0,
         mapQuery: "Ben Thanh Market",
         ytKeyword: "濱城市場 美食"
       },
-      { 
-        time: "14:00", 
-        label: "前往機場 (T2)", 
-        note: "週六易塞車，提早出發", 
-        costVND: 0, 
+      {
+        time: "14:00",
+        label: "前往機場 (T2)",
+        note: "週六易塞車，提早出發",
+        costVND: 0,
         mapQuery: "Tan Son Nhat International Terminal",
         ytKeyword: "新山一機場 出境"
       }
@@ -275,7 +275,7 @@ const FOOD_MENU = [
 
 // --- 行李清單 ---
 const DEFAULT_CHECKLIST = [
-  "護照 (效期6個月以上)", "越南電子簽證", "台幣或美金 (換匯用)", 
+  "護照 (效期6個月以上)", "越南電子簽證", "台幣或美金 (換匯用)",
   "越南SIM卡 / 漫遊開通", "個人常備藥 / 腸胃藥", "兒童退燒藥 / 體溫計",
   "防蚊液", "防曬用品", "薄外套 (飛機/冷氣房/防曬)",
   "泳衣 / 泳具", "牙刷牙膏", "手機充電線 / 行動電源"
@@ -295,7 +295,7 @@ const WeatherWidget = () => {
   }, []);
   return (
     <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-white text-sm border border-white/20">
-      {temp ? <>{temp > 30 ? <Sun className="w-4 h-4 text-yellow-300"/> : <CloudRain className="w-4 h-4 text-blue-200"/>}<span>{temp}°C</span></> : <span>...</span>}
+      {temp ? <>{temp > 30 ? <Sun className="w-4 h-4 text-yellow-300" /> : <CloudRain className="w-4 h-4 text-blue-200" />}<span>{temp}°C</span></> : <span>...</span>}
     </div>
   );
 };
@@ -305,12 +305,12 @@ const CurrencyConverter = () => {
   const [vnd, setVnd] = useState('');
   return (
     <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-5 text-white shadow-xl mb-6 relative overflow-hidden">
-      <div className="flex justify-between mb-4 relative z-10"><h3 className="font-bold flex gap-2"><Calculator className="w-5 h-5"/> 匯率換算</h3><span className="text-xs bg-white/20 px-2 py-1 rounded">1 TWD ≈ {EXCHANGE_RATE} VND</span></div>
+      <div className="flex justify-between mb-4 relative z-10"><h3 className="font-bold flex gap-2"><Calculator className="w-5 h-5" /> 匯率換算</h3><span className="text-xs bg-white/20 px-2 py-1 rounded">1 TWD ≈ {EXCHANGE_RATE} VND</span></div>
       <div className="space-y-3 relative z-10">
-        <input type="text" inputMode="numeric" value={vnd ? parseInt(vnd).toLocaleString() : ''} onChange={(e)=>setVnd(e.target.value.replace(/,/g,''))} className="w-full bg-black/20 border-white/30 rounded-xl px-3 py-4 text-2xl text-right text-white focus:outline-none placeholder-white/30" placeholder="輸入越盾 (VND)" />
-        <div className="bg-white text-teal-800 rounded-xl px-4 py-3 flex justify-between items-center"><span className="text-sm font-bold">約台幣 (TWD)</span><span className="text-2xl font-bold font-mono">{vnd ? Math.round(vnd/EXCHANGE_RATE).toLocaleString() : '0'}</span></div>
+        <input type="text" inputMode="numeric" value={vnd ? parseInt(vnd).toLocaleString() : ''} onChange={(e) => setVnd(e.target.value.replace(/,/g, ''))} className="w-full bg-black/20 border-white/30 rounded-xl px-3 py-4 text-2xl text-right text-white focus:outline-none placeholder-white/30" placeholder="輸入越盾 (VND)" />
+        <div className="bg-white text-teal-800 rounded-xl px-4 py-3 flex justify-between items-center"><span className="text-sm font-bold">約台幣 (TWD)</span><span className="text-2xl font-bold font-mono">{vnd ? Math.round(vnd / EXCHANGE_RATE).toLocaleString() : '0'}</span></div>
       </div>
-      <div className="mt-4 flex justify-end gap-2 relative z-10">{[10000, 50000, 100000, 500000].map(amt=><button key={amt} onClick={()=>setVnd(amt.toString())} className="text-[10px] bg-white/20 px-2 py-1 rounded">{amt/1000}k</button>)}</div>
+      <div className="mt-4 flex justify-end gap-2 relative z-10">{[10000, 50000, 100000, 500000].map(amt => <button key={amt} onClick={() => setVnd(amt.toString())} className="text-[10px] bg-white/20 px-2 py-1 rounded">{amt / 1000}k</button>)}</div>
     </div>
   );
 };
@@ -319,18 +319,18 @@ const CurrencyConverter = () => {
 const TaxiCardModal = ({ location, onClose }) => {
   if (!location) return null;
   const openMap = () => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location.mapQuery)}`, '_blank');
-  
+
   return (
     <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
       <div className="bg-white w-full max-w-sm rounded-3xl p-6 relative" onClick={e => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute top-4 right-4 bg-gray-100 p-1 rounded-full"><X className="w-6 h-6 text-gray-500"/></button>
+        <button onClick={onClose} className="absolute top-4 right-4 bg-gray-100 p-1 rounded-full"><X className="w-6 h-6 text-gray-500" /></button>
         <h3 className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6 text-center">請給司機看 (Show Driver)</h3>
         <div className="text-center py-6 border-y-2 border-teal-500 my-2">
           <h2 className="text-2xl font-extrabold text-teal-800 mb-4">{location.vnName}</h2>
           <p className="text-gray-800 text-lg">{location.address}</p>
         </div>
         <div className="mt-6 flex gap-3">
-           <button onClick={openMap} className="flex-1 bg-blue-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-700"><Map className="w-5 h-5"/> 開啟導航</button>
+          <button onClick={openMap} className="flex-1 bg-blue-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-blue-700"><Map className="w-5 h-5" /> 開啟導航</button>
         </div>
       </div>
     </div>
@@ -357,13 +357,13 @@ const PackingList = () => {
   return (
     <div className="bg-white rounded-2xl shadow-sm p-5 border-l-4 border-purple-400">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="font-bold text-gray-800 flex items-center gap-2"><ShoppingBag className="w-5 h-5 text-purple-500"/> 行李清單</h2>
+        <h2 className="font-bold text-gray-800 flex items-center gap-2"><ShoppingBag className="w-5 h-5 text-purple-500" /> 行李清單</h2>
         <span className="text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded-full">{progress}% 完成</span>
       </div>
       <div className="space-y-2">
         {items.map((item, idx) => (
           <div key={idx} onClick={() => toggle(idx)} className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
-            {item.checked ? <CheckSquare className="w-5 h-5 text-purple-500"/> : <Square className="w-5 h-5 text-gray-300"/>}
+            {item.checked ? <CheckSquare className="w-5 h-5 text-purple-500" /> : <Square className="w-5 h-5 text-gray-300" />}
             <span className={`${item.checked ? 'text-gray-400 line-through' : 'text-gray-700'}`}>{item.name}</span>
           </div>
         ))}
@@ -495,8 +495,8 @@ const TravelNotesPage = () => (
         </div>
         <p className="text-sm text-gray-700">之後流程：</p>
         <div className="flex items-center gap-2 text-sm text-teal-700 font-bold bg-teal-50 rounded-xl px-4 py-3">
-          <span>移民審查</span><ChevronRight className="w-4 h-4"/>
-          <span>領行李</span><ChevronRight className="w-4 h-4"/>
+          <span>移民審查</span><ChevronRight className="w-4 h-4" />
+          <span>領行李</span><ChevronRight className="w-4 h-4" />
           <span>走出海關</span>
         </div>
         <div className="bg-green-50 rounded-xl p-3 text-sm text-green-800">
@@ -696,7 +696,7 @@ export default function App() {
               <Plane className="w-5 h-5 transform -rotate-45 text-teal-300" /> 胡志明自由行
             </h1>
             <div className="flex items-center gap-2 text-xs text-teal-100/80 mt-0.5">
-              <Calendar className="w-3 h-3"/> 2026/3/17-21 <span className="w-1 h-1 bg-teal-300 rounded-full"></span> <Users className="w-3 h-3"/> 13人
+              <Calendar className="w-3 h-3" /> 2026/3/17-21 <span className="w-1 h-1 bg-teal-300 rounded-full"></span> <Users className="w-3 h-3" /> 13人
             </div>
           </div>
           <WeatherWidget />
@@ -710,7 +710,7 @@ export default function App() {
             {ITINERARY.map((day) => (
               <div key={day.day} className="bg-white rounded-3xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
                 {/* Day Header */}
-                <button 
+                <button
                   onClick={() => setOpenDay(openDay === day.day ? null : day.day)}
                   className="w-full p-5 flex items-center justify-between active:scale-[0.99] transition-transform"
                 >
@@ -727,7 +727,7 @@ export default function App() {
                       <p className="text-[11px] text-gray-400 mt-0.5">{day.desc}</p>
                     </div>
                   </div>
-                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0 ml-2 ${openDay === day.day ? 'rotate-180' : ''}`}/>
+                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0 ml-2 ${openDay === day.day ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Day Content */}
@@ -740,7 +740,7 @@ export default function App() {
                           {idx !== day.details.length - 1 && (
                             <div className="absolute left-[19px] top-10 bottom-0 w-0.5 bg-gradient-to-b from-teal-200 to-transparent"></div>
                           )}
-                          
+
                           {/* Activity Card */}
                           <div className="flex gap-4">
                             {/* Time indicator */}
@@ -759,7 +759,7 @@ export default function App() {
                                   <div className="ml-3 flex-shrink-0">
                                     <div className="text-right">
                                       <div className="text-xs font-bold text-teal-600">
-                                        ${item.fixedTwd || Math.round(item.costVND/EXCHANGE_RATE)}
+                                        ${item.fixedTwd || Math.round(item.costVND / EXCHANGE_RATE)}
                                       </div>
                                       <div className="text-[9px] text-gray-400 font-medium">TWD</div>
                                     </div>
@@ -769,18 +769,18 @@ export default function App() {
 
                               {/* Description */}
                               <p className="text-sm text-gray-500 leading-relaxed mb-3">{item.note}</p>
-                              
+
                               {/* Action Buttons */}
                               <div className="flex gap-2">
-                                <button 
-                                  onClick={(e) => { e.stopPropagation(); openMap(item.mapQuery); }} 
+                                <button
+                                  onClick={(e) => { e.stopPropagation(); openMap(item.mapQuery); }}
                                   className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-blue-600 px-3 py-1.5 rounded-full hover:bg-blue-50 transition-colors"
                                 >
                                   <Map className="w-3.5 h-3.5" />
                                   <span className="font-medium">導航</span>
                                 </button>
-                                <button 
-                                  onClick={(e) => { e.stopPropagation(); openYoutube(item.ytKeyword); }} 
+                                <button
+                                  onClick={(e) => { e.stopPropagation(); openYoutube(item.ytKeyword); }}
                                   className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-red-600 px-3 py-1.5 rounded-full hover:bg-red-50 transition-colors"
                                 >
                                   <Youtube className="w-3.5 h-3.5" />
@@ -803,23 +803,23 @@ export default function App() {
         {activeTab === 'tools' && (
           <div className="animate-fade-in space-y-6">
             <CurrencyConverter />
-            
+
             {/* 點餐手指通 (新版) */}
             <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
-              <h2 className="font-bold text-gray-800 mb-4 flex items-center gap-2"><Utensils className="w-5 h-5 text-teal-600"/> 美食圖鑑 & 點餐</h2>
+              <h2 className="font-bold text-gray-800 mb-4 flex items-center gap-2"><Utensils className="w-5 h-5 text-teal-600" /> 美食圖鑑 & 點餐</h2>
               <div className="grid gap-3">
                 {FOOD_MENU.map((f, idx) => (
                   <div key={idx} className="border border-gray-100 p-3 rounded-xl flex items-start gap-3 hover:bg-orange-50 cursor-pointer transition-colors" onClick={() => playAudio(f.vn)}>
                     <div className="text-4xl bg-gray-50 w-16 h-16 flex items-center justify-center rounded-lg">{f.icon}</div>
                     <div className="flex-1">
-                        <div className="flex justify-between items-start">
-                            <h3 className="font-bold text-gray-800">{f.name}</h3>
-                            <div className="text-right">
-                                <span className="block text-xs font-bold text-teal-600">{formatPrice(f.price)}</span>
-                            </div>
+                      <div className="flex justify-between items-start">
+                        <h3 className="font-bold text-gray-800">{f.name}</h3>
+                        <div className="text-right">
+                          <span className="block text-xs font-bold text-teal-600">{formatPrice(f.price)}</span>
                         </div>
-                        <div className="text-xs text-teal-600 font-bold mb-1">{f.vn} <Volume2 className="w-3 h-3 inline ml-1 opacity-50"/></div>
-                        <p className="text-xs text-gray-500 leading-tight">{f.desc}</p>
+                      </div>
+                      <div className="text-xs text-teal-600 font-bold mb-1">{f.vn} <Volume2 className="w-3 h-3 inline ml-1 opacity-50" /></div>
+                      <p className="text-xs text-gray-500 leading-tight">{f.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -827,7 +827,7 @@ export default function App() {
             </div>
 
             <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
-              <h2 className="font-bold text-gray-800 mb-4 flex items-center gap-2"><Navigation className="w-5 h-5 text-teal-600"/> 計程車卡 (含導航)</h2>
+              <h2 className="font-bold text-gray-800 mb-4 flex items-center gap-2"><Navigation className="w-5 h-5 text-teal-600" /> 計程車卡 (含導航)</h2>
               <div className="grid grid-cols-2 gap-3">
                 {LOCATIONS.map((loc, idx) => (
                   <button key={idx} onClick={() => setSelectedLocation(loc)} className="p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 rounded-xl text-left active:scale-95 transition-all">
@@ -837,21 +837,21 @@ export default function App() {
                 ))}
               </div>
             </div>
-            
+
             {/* 常用語音 */}
             <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
-              <h2 className="font-bold text-gray-800 mb-4 flex items-center gap-2"><Languages className="w-5 h-5 text-teal-600"/> 常用語音</h2>
+              <h2 className="font-bold text-gray-800 mb-4 flex items-center gap-2"><Languages className="w-5 h-5 text-teal-600" /> 常用語音</h2>
               <div className="grid grid-cols-2 gap-3">
-                 {[
-                   {ch:"你好",vn:"Xin chào"},{ch:"謝謝",vn:"Cảm ơn"},
-                   {ch:"買單",vn:"Tính tiền"},{ch:"太貴了",vn:"Mắc quá"},
-                   {ch:"不要加冰",vn:"Không đá"},{ch:"廁所?",vn:"Toilet?"}
-                 ].map((p,i)=>(
-                   <button key={i} onClick={()=>playAudio(p.vn)} className="p-3 border border-gray-100 rounded-xl flex justify-between items-center hover:bg-gray-50">
-                     <span className="text-sm font-bold text-gray-700">{p.ch}</span>
-                     <Volume2 className="w-4 h-4 text-teal-500"/>
-                   </button>
-                 ))}
+                {[
+                  { ch: "你好", vn: "Xin chào" }, { ch: "謝謝", vn: "Cảm ơn" },
+                  { ch: "買單", vn: "Tính tiền" }, { ch: "太貴了", vn: "Mắc quá" },
+                  { ch: "不要加冰", vn: "Không đá" }, { ch: "廁所?", vn: "Toilet?" }
+                ].map((p, i) => (
+                  <button key={i} onClick={() => playAudio(p.vn)} className="p-3 border border-gray-100 rounded-xl flex justify-between items-center hover:bg-gray-50">
+                    <span className="text-sm font-bold text-gray-700">{p.ch}</span>
+                    <Volume2 className="w-4 h-4 text-teal-500" />
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -861,7 +861,7 @@ export default function App() {
         {activeTab === 'info' && (
           <div className="animate-fade-in space-y-6">
             <PackingList />
-            
+
             <div className="bg-red-50 rounded-2xl shadow-sm p-5 border border-red-100">
               <h2 className="font-bold text-red-700 mb-2 flex items-center gap-2">注意</h2>
               <div className="text-sm space-y-2 text-red-800">
@@ -877,10 +877,10 @@ export default function App() {
 
       {/* 底部導覽 */}
       <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 pb-safe pt-2 px-4 flex justify-around md:hidden z-50">
-        <button onClick={() => setActiveTab('itinerary')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'itinerary' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Calendar className="w-6 h-6"/><span className="text-[10px] font-medium">行程</span></button>
-        <button onClick={() => setActiveTab('tools')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'tools' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Utensils className="w-6 h-6"/><span className="text-[10px] font-medium">工具/美食</span></button>
-        <button onClick={() => setActiveTab('info')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'info' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><ShoppingBag className="w-6 h-6"/><span className="text-[10px] font-medium">行李建議</span></button>
-        <button onClick={() => setActiveTab('travel-notes')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'travel-notes' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><BookOpen className="w-6 h-6"/><span className="text-[10px] font-medium">注意事項</span></button>
+        <button onClick={() => setActiveTab('itinerary')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'itinerary' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Calendar className="w-6 h-6" /><span className="text-[10px] font-medium">行程</span></button>
+        <button onClick={() => setActiveTab('tools')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'tools' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Utensils className="w-6 h-6" /><span className="text-[10px] font-medium">工具/美食</span></button>
+        <button onClick={() => setActiveTab('info')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'info' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><ShoppingBag className="w-6 h-6" /><span className="text-[10px] font-medium">行李建議</span></button>
+        <button onClick={() => setActiveTab('travel-notes')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'travel-notes' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><BookOpen className="w-6 h-6" /><span className="text-[10px] font-medium">注意事項</span></button>
       </div>
 
       {selectedLocation && <TaxiCardModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />}
