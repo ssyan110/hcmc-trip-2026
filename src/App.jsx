@@ -54,11 +54,11 @@ const ITINERARY = [
       },
       {
         time: "18:30",
-        label: "晚餐：Nha Hang Ngon",
-        note: "集結各式小吃，環境好。人均約 300 台幣",
-        costVND: 250000,
-        mapQuery: "Nha Hang Ngon 160 Pasteur",
-        ytKeyword: "Nha Hang Ngon 胡志明"
+        label: "晚餐：Om Nướng Ba Son",
+        note: "集結各式小吃，環境好。人均約 400-700 台幣 (看點的菜）",
+        costVND: 450000,
+        mapQuery: "Om Nướng Ba Son",
+        ytKeyword: "胡志明Om Nướng Ba Son"
       },
       {
         time: "20:30",
@@ -79,7 +79,7 @@ const ITINERARY = [
       {
         time: "08:00",
         label: "早餐：越南河粉",
-        note: "推薦：Pho Hoa 或 飯店早餐",
+        note: "推薦：Pho Hoa 或 自選",
         costVND: 70000,
         mapQuery: "Pho Hoa Pasteur",
         ytKeyword: "胡志明 河粉 推薦"
@@ -94,7 +94,7 @@ const ITINERARY = [
       },
       {
         time: "12:00",
-        label: "午餐：Secret Garden",
+        label: "午餐推薦：Secret Garden",
         note: "頂樓花園餐廳，氣氛佳家常菜",
         costVND: 180000,
         mapQuery: "Secret Garden Restaurant Pasteur",
@@ -127,10 +127,10 @@ const ITINERARY = [
       {
         time: "07:30",
         label: "專車接送出發",
-        note: "第1郡飯店上車，前往美托",
+        note: "坐車到指定地點，上車跟團前往美托",
         costVND: 550000,
         mapQuery: "District 1 Ho Chi Minh City",
-        ytKeyword: "美托一日遊"
+        ytKeyword: "美托檳知一日遊"
       },
       {
         time: "10:30",
@@ -174,7 +174,7 @@ const ITINERARY = [
     details: [
       {
         time: "08:30",
-        label: "早餐：九龍冰室",
+        label: "早餐推薦：九龍冰室",
         note: "港式點心，體驗堤岸華人文化",
         costVND: 300000,
         mapQuery: "Kowloon Bing Sutt Ho Chi Minh",
@@ -190,7 +190,7 @@ const ITINERARY = [
       },
       {
         time: "12:00",
-        label: "午餐：東源雞飯",
+        label: "午餐推薦：東源雞飯",
         note: "海南雞飯，醬料一絕",
         costVND: 150000,
         mapQuery: "Com Ga Dong Nguyen",
@@ -206,11 +206,11 @@ const ITINERARY = [
       },
       {
         time: "19:00",
-        label: "雙層觀光巴士",
-        note: "兜風看夜景 (歌劇院旁搭車)",
-        costVND: 150000,
-        mapQuery: "Saigon Opera House",
-        ytKeyword: "胡志明 雙層巴士"
+        label: "自由活動士",
+        note: "胡志明市自由活動",
+        costVND: 0,
+        mapQuery: "胡志明市",
+        ytKeyword: "胡志明市自由活動"
       }
     ]
   },
@@ -221,16 +221,16 @@ const ITINERARY = [
     desc: "咖啡公寓 • 最後衝刺 • 機場",
     details: [
       {
-        time: "09:30",
-        label: "咖啡公寓 / 早午餐",
+        time: "00:00",
+        label: "推薦咖啡公寓 / 早午餐",
         note: "42 Nguyen Hue • 拍照打卡",
         costVND: 100000,
         mapQuery: "The Cafe Apartment",
         ytKeyword: "咖啡公寓 胡志明"
       },
       {
-        time: "11:30",
-        label: "最後採買 & 午餐",
+        time: "10:00",
+        label: "可到超市做最後採買 & 午餐",
         note: "把越盾花完",
         costVND: 0,
         mapQuery: "Ben Thanh Market",
@@ -238,8 +238,8 @@ const ITINERARY = [
       },
       {
         time: "14:00",
-        label: "前往機場 (T2)",
-        note: "週六易塞車，提早出發",
+        label: "最晚下午兩點出發前往機場 (T2)",
+        note: "易塞車，提早出發",
         costVND: 0,
         mapQuery: "Tan Son Nhat International Terminal",
         ytKeyword: "新山一機場 出境"
