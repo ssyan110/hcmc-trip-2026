@@ -413,11 +413,10 @@ const TabButton = ({ tab, active, onClick, mobile = false }) => {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${
-        active
+      className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${active
           ? 'border-teal-200 bg-teal-50 text-teal-700 shadow-sm'
           : 'border-transparent bg-white/70 text-slate-600 hover:border-slate-200 hover:bg-white'
-      } ${mobile ? 'min-w-[7.5rem] justify-center px-3 py-2.5' : 'w-full'}`}
+        } ${mobile ? 'min-w-[7.5rem] justify-center px-3 py-2.5' : 'w-full'}`}
     >
       <Icon className={`${mobile ? 'h-5 w-5' : 'h-5 w-5 flex-shrink-0'}`} />
       <span className={`${mobile ? 'text-xs font-semibold' : 'min-w-0'}`}>
@@ -727,10 +726,10 @@ export default function App() {
                 Ho Chi Minh City Trip
               </div>
               <h1 className="font-bold text-2xl flex items-center gap-2 tracking-tight sm:text-3xl">
-              <Plane className="w-5 h-5 transform -rotate-45 text-teal-300" /> 胡志明自由行
+                <Plane className="w-5 h-5 transform -rotate-45 text-teal-300" /> 胡志明自由行
               </h1>
               <p className="mt-2 max-w-2xl text-sm text-teal-50/90 sm:text-base">
-                手機優先的旅遊助手，現在也會在平板與桌面寬度下自動展開更寬鬆的資訊布局。
+                胡志明市旅遊助手
               </p>
               <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-teal-100/90 sm:text-sm">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5"><Calendar className="h-3.5 w-3.5" /> 2026/3/17-21</span>
@@ -795,95 +794,95 @@ export default function App() {
           {/* TAB 1: 行程 */}
           {activeTab === 'itinerary' && (
             <div className="animate-fade-in grid gap-4 xl:grid-cols-2">
-            {ITINERARY.map((day) => (
-              <div key={day.day} className="overflow-hidden rounded-3xl bg-white shadow-sm transition-all duration-300 hover:shadow-md">
-                {/* Day Header */}
-                <button
-                  onClick={() => setOpenDay(openDay === day.day ? null : day.day)}
-                  className="flex w-full items-start justify-between gap-3 p-5 text-left transition-transform active:scale-[0.99] sm:items-center sm:p-6"
-                >
-                  <div className="flex min-w-0 items-start gap-4 sm:items-center">
-                    <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg shadow-teal-500/20 sm:h-16 sm:w-16">
-                      <div className="text-center">
-                        <div className="text-[10px] font-semibold text-teal-100 uppercase tracking-wide">Day</div>
-                        <div className="text-2xl font-bold text-white leading-none">{day.day}</div>
+              {ITINERARY.map((day) => (
+                <div key={day.day} className="overflow-hidden rounded-3xl bg-white shadow-sm transition-all duration-300 hover:shadow-md">
+                  {/* Day Header */}
+                  <button
+                    onClick={() => setOpenDay(openDay === day.day ? null : day.day)}
+                    className="flex w-full items-start justify-between gap-3 p-5 text-left transition-transform active:scale-[0.99] sm:items-center sm:p-6"
+                  >
+                    <div className="flex min-w-0 items-start gap-4 sm:items-center">
+                      <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg shadow-teal-500/20 sm:h-16 sm:w-16">
+                        <div className="text-center">
+                          <div className="text-[10px] font-semibold text-teal-100 uppercase tracking-wide">Day</div>
+                          <div className="text-2xl font-bold text-white leading-none">{day.day}</div>
+                        </div>
+                      </div>
+                      <div className="min-w-0 flex-1 text-left">
+                        <h3 className="mb-0.5 text-base font-semibold leading-tight text-gray-900 sm:text-lg">{day.title}</h3>
+                        <p className="text-xs text-gray-400 font-medium">{day.date}</p>
+                        <p className="mt-0.5 text-[11px] text-gray-400 sm:text-xs">{day.desc}</p>
                       </div>
                     </div>
-                    <div className="min-w-0 flex-1 text-left">
-                      <h3 className="mb-0.5 text-base font-semibold leading-tight text-gray-900 sm:text-lg">{day.title}</h3>
-                      <p className="text-xs text-gray-400 font-medium">{day.date}</p>
-                      <p className="mt-0.5 text-[11px] text-gray-400 sm:text-xs">{day.desc}</p>
-                    </div>
-                  </div>
-                  <ChevronDown className={`ml-2 h-5 w-5 flex-shrink-0 text-gray-400 transition-transform duration-300 ${openDay === day.day ? 'rotate-180' : ''}`} />
-                </button>
+                    <ChevronDown className={`ml-2 h-5 w-5 flex-shrink-0 text-gray-400 transition-transform duration-300 ${openDay === day.day ? 'rotate-180' : ''}`} />
+                  </button>
 
-                {/* Day Content */}
-                {openDay === day.day && (
-                  <div className="bg-gradient-to-b from-gray-50/50 to-white px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
-                    <div className="space-y-5">
-                      {day.details.map((item, idx) => (
-                        <div key={idx} className="relative">
-                          {/* Timeline connector */}
-                          {idx !== day.details.length - 1 && (
-                            <div className="absolute left-[19px] top-10 bottom-0 w-0.5 bg-gradient-to-b from-teal-200 to-transparent"></div>
-                          )}
+                  {/* Day Content */}
+                  {openDay === day.day && (
+                    <div className="bg-gradient-to-b from-gray-50/50 to-white px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
+                      <div className="space-y-5">
+                        {day.details.map((item, idx) => (
+                          <div key={idx} className="relative">
+                            {/* Timeline connector */}
+                            {idx !== day.details.length - 1 && (
+                              <div className="absolute left-[19px] top-10 bottom-0 w-0.5 bg-gradient-to-b from-teal-200 to-transparent"></div>
+                            )}
 
-                          {/* Activity Card */}
-                          <div className="flex gap-3 sm:gap-4">
-                            {/* Time indicator */}
-                            <div className="flex-shrink-0 pt-1">
-                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-teal-500 shadow-lg shadow-teal-500/25">
-                                <span className="text-white text-xs font-bold">{item.time.split(':')[0]}<span className="text-[8px]">:{item.time.split(':')[1]}</span></span>
+                            {/* Activity Card */}
+                            <div className="flex gap-3 sm:gap-4">
+                              {/* Time indicator */}
+                              <div className="flex-shrink-0 pt-1">
+                                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-teal-500 shadow-lg shadow-teal-500/25">
+                                  <span className="text-white text-xs font-bold">{item.time.split(':')[0]}<span className="text-[8px]">:{item.time.split(':')[1]}</span></span>
+                                </div>
                               </div>
-                            </div>
 
-                            {/* Content */}
-                            <div className="flex-1 rounded-2xl border border-gray-100/50 bg-white p-4 shadow-sm">
-                              {/* Title & Cost */}
-                              <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                                <h4 className="flex-1 text-[15px] font-semibold leading-tight text-gray-900">{item.label}</h4>
-                                {item.costVND !== 0 && (
-                                  <div className="flex-shrink-0 sm:ml-3">
-                                    <div className="text-left sm:text-right">
-                                      <div className="text-xs font-bold text-teal-600">
-                                        ${item.fixedTwd || Math.round(item.costVND / EXCHANGE_RATE)}
+                              {/* Content */}
+                              <div className="flex-1 rounded-2xl border border-gray-100/50 bg-white p-4 shadow-sm">
+                                {/* Title & Cost */}
+                                <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                                  <h4 className="flex-1 text-[15px] font-semibold leading-tight text-gray-900">{item.label}</h4>
+                                  {item.costVND !== 0 && (
+                                    <div className="flex-shrink-0 sm:ml-3">
+                                      <div className="text-left sm:text-right">
+                                        <div className="text-xs font-bold text-teal-600">
+                                          ${item.fixedTwd || Math.round(item.costVND / EXCHANGE_RATE)}
+                                        </div>
+                                        <div className="text-[9px] text-gray-400 font-medium">TWD</div>
                                       </div>
-                                      <div className="text-[9px] text-gray-400 font-medium">TWD</div>
                                     </div>
-                                  </div>
-                                )}
-                              </div>
+                                  )}
+                                </div>
 
-                              {/* Description */}
-                              <p className="text-sm text-gray-500 leading-relaxed mb-3">{item.note}</p>
+                                {/* Description */}
+                                <p className="text-sm text-gray-500 leading-relaxed mb-3">{item.note}</p>
 
-                              {/* Action Buttons */}
-                              <div className="flex flex-wrap gap-2">
-                                <button
-                                  onClick={(e) => { e.stopPropagation(); openMap(item.mapQuery); }}
-                                  className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600"
-                                >
-                                  <Map className="w-3.5 h-3.5" />
-                                  <span className="font-medium">導航</span>
-                                </button>
-                                <button
-                                  onClick={(e) => { e.stopPropagation(); openYoutube(item.ytKeyword); }}
-                                  className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs text-gray-600 transition-colors hover:bg-red-50 hover:text-red-600"
-                                >
-                                  <Youtube className="w-3.5 h-3.5" />
-                                  <span className="font-medium">影片</span>
-                                </button>
+                                {/* Action Buttons */}
+                                <div className="flex flex-wrap gap-2">
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); openMap(item.mapQuery); }}
+                                    className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600"
+                                  >
+                                    <Map className="w-3.5 h-3.5" />
+                                    <span className="font-medium">導航</span>
+                                  </button>
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); openYoutube(item.ytKeyword); }}
+                                    className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs text-gray-600 transition-colors hover:bg-red-50 hover:text-red-600"
+                                  >
+                                    <Youtube className="w-3.5 h-3.5" />
+                                    <span className="font-medium">影片</span>
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              ))}
             </div>
           )}
 
@@ -898,33 +897,33 @@ export default function App() {
               <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6">
                 <h2 className="mb-4 flex items-center gap-2 font-bold text-gray-800"><Utensils className="w-5 h-5 text-teal-600" /> 美食圖鑑 & 點餐</h2>
                 <div className="grid gap-3 sm:grid-cols-2">
-                {FOOD_MENU.map((f, idx) => (
-                  <div key={idx} className="flex cursor-pointer items-start gap-3 rounded-2xl border border-gray-100 p-3 transition-colors hover:bg-orange-50" onClick={() => playAudio(f.vn)}>
-                    <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-xl bg-gray-50 text-4xl">{f.icon}</div>
-                    <div className="flex-1">
-                      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                        <h3 className="font-bold text-gray-800">{f.name}</h3>
-                        <div className="text-left sm:text-right">
-                          <span className="block text-xs font-bold text-teal-600">{formatPrice(f.price)}</span>
+                  {FOOD_MENU.map((f, idx) => (
+                    <div key={idx} className="flex cursor-pointer items-start gap-3 rounded-2xl border border-gray-100 p-3 transition-colors hover:bg-orange-50" onClick={() => playAudio(f.vn)}>
+                      <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-xl bg-gray-50 text-4xl">{f.icon}</div>
+                      <div className="flex-1">
+                        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                          <h3 className="font-bold text-gray-800">{f.name}</h3>
+                          <div className="text-left sm:text-right">
+                            <span className="block text-xs font-bold text-teal-600">{formatPrice(f.price)}</span>
+                          </div>
                         </div>
+                        <div className="text-xs text-teal-600 font-bold mb-1">{f.vn} <Volume2 className="w-3 h-3 inline ml-1 opacity-50" /></div>
+                        <p className="text-xs text-gray-500 leading-tight">{f.desc}</p>
                       </div>
-                      <div className="text-xs text-teal-600 font-bold mb-1">{f.vn} <Volume2 className="w-3 h-3 inline ml-1 opacity-50" /></div>
-                      <p className="text-xs text-gray-500 leading-tight">{f.desc}</p>
                     </div>
-                  </div>
-                ))}
+                  ))}
                 </div>
               </div>
 
               <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6">
                 <h2 className="mb-4 flex items-center gap-2 font-bold text-gray-800"><Navigation className="w-5 h-5 text-teal-600" /> 計程車卡 (含導航)</h2>
                 <div className="grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
-                {LOCATIONS.map((loc, idx) => (
-                  <button key={idx} onClick={() => setSelectedLocation(loc)} className="rounded-2xl border border-gray-200 bg-gray-50 p-3 text-left transition-all hover:bg-teal-50 active:scale-95">
-                    <div className="text-sm font-bold text-gray-700">{loc.name}</div>
-                    <div className="mt-1 text-[10px] leading-relaxed text-gray-400">{loc.vnName}</div>
-                  </button>
-                ))}
+                  {LOCATIONS.map((loc, idx) => (
+                    <button key={idx} onClick={() => setSelectedLocation(loc)} className="rounded-2xl border border-gray-200 bg-gray-50 p-3 text-left transition-all hover:bg-teal-50 active:scale-95">
+                      <div className="text-sm font-bold text-gray-700">{loc.name}</div>
+                      <div className="mt-1 text-[10px] leading-relaxed text-gray-400">{loc.vnName}</div>
+                    </button>
+                  ))}
                 </div>
               </div>
 
@@ -932,16 +931,16 @@ export default function App() {
               <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6 xl:col-span-2">
                 <h2 className="mb-4 flex items-center gap-2 font-bold text-gray-800"><Languages className="w-5 h-5 text-teal-600" /> 常用語音</h2>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {[
-                  { ch: "你好", vn: "Xin chào" }, { ch: "謝謝", vn: "Cảm ơn" },
-                  { ch: "買單", vn: "Tính tiền" }, { ch: "太貴了", vn: "Mắc quá" },
-                  { ch: "不要加冰", vn: "Không đá" }, { ch: "廁所?", vn: "Toilet?" }
-                ].map((p, i) => (
-                  <button key={i} onClick={() => playAudio(p.vn)} className="flex items-center justify-between rounded-2xl border border-gray-100 p-3 hover:bg-gray-50">
-                    <span className="text-sm font-bold text-gray-700">{p.ch}</span>
-                    <Volume2 className="w-4 h-4 text-teal-500" />
-                  </button>
-                ))}
+                  {[
+                    { ch: "你好", vn: "Xin chào" }, { ch: "謝謝", vn: "Cảm ơn" },
+                    { ch: "買單", vn: "Tính tiền" }, { ch: "太貴了", vn: "Mắc quá" },
+                    { ch: "不要加冰", vn: "Không đá" }, { ch: "廁所?", vn: "Toilet?" }
+                  ].map((p, i) => (
+                    <button key={i} onClick={() => playAudio(p.vn)} className="flex items-center justify-between rounded-2xl border border-gray-100 p-3 hover:bg-gray-50">
+                      <span className="text-sm font-bold text-gray-700">{p.ch}</span>
+                      <Volume2 className="w-4 h-4 text-teal-500" />
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
