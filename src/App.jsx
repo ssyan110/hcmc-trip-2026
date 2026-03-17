@@ -414,8 +414,8 @@ const TabButton = ({ tab, active, onClick, mobile = false }) => {
     <button
       onClick={onClick}
       className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${active
-          ? 'border-teal-200 bg-teal-50 text-teal-700 shadow-sm'
-          : 'border-transparent bg-white/70 text-slate-600 hover:border-slate-200 hover:bg-white'
+        ? 'border-teal-200 bg-teal-50 text-teal-700 shadow-sm'
+        : 'border-transparent bg-white/70 text-slate-600 hover:border-slate-200 hover:bg-white'
         } ${mobile ? 'min-w-[7.5rem] justify-center px-3 py-2.5' : 'w-full'}`}
     >
       <Icon className={`${mobile ? 'h-5 w-5' : 'h-5 w-5 flex-shrink-0'}`} />
@@ -761,7 +761,7 @@ export default function App() {
             <div className="rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 p-5 text-white shadow-xl">
               <p className="text-xs uppercase tracking-[0.25em] text-teal-200">旅程總覽</p>
               <h2 className="mt-2 text-2xl font-bold">5 天 4 夜</h2>
-              <p className="mt-2 text-sm text-slate-300">手機保留底部導覽，桌面改成固定側欄，切換分頁時不需要回到底部。</p>
+              <p className="mt-2 text-sm text-slate-300">行程、餐廳可能會因大家討論後而有所改變。</p>
               <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-2xl bg-white/10 p-3">
                   <div className="text-slate-300">主要區域</div>
