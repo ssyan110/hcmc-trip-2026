@@ -955,7 +955,7 @@ export default function App() {
                 <h2 className="mb-2 flex items-center gap-2 font-bold text-red-700">注意</h2>
                 <div className="space-y-3 text-sm text-red-800">
                   <p>請依照個人需求準備行李，特別是醫藥品、清潔用品、過敏藥等等。</p>
-                  <p>平板與桌面版會把清單拆成雙欄，手機維持單列，勾選區域也更好點擊。</p>
+
                 </div>
               </div>
             </div>
