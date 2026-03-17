@@ -733,7 +733,7 @@ export default function App() {
               </p>
               <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-teal-100/90 sm:text-sm">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5"><Calendar className="h-3.5 w-3.5" /> 2026/3/17-21</span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5"><Users className="h-3.5 w-3.5" /> 13人同行</span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5"><Users className="h-3.5 w-3.5" /> 13人</span>
               </div>
             </div>
             <div className="flex items-center gap-2 self-start md:self-auto">
@@ -955,7 +955,6 @@ export default function App() {
                 <h2 className="mb-2 flex items-center gap-2 font-bold text-red-700">注意</h2>
                 <div className="space-y-3 text-sm text-red-800">
                   <p>請依照個人需求準備行李，特別是醫藥品、清潔用品、過敏藥等等。</p>
-
                 </div>
               </div>
             </div>
