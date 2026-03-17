@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Plane, MapPin, Utensils, ShoppingBag, Calendar,
-  CreditCard, Info, Sun, CloudRain,
-  Languages, Phone, X, Volume2,
+  Plane, Utensils, ShoppingBag, Calendar,
+  Sun, CloudRain, Languages, X, Volume2,
   Calculator, ChevronRight, ChevronDown, Navigation, Map,
-  Users, CheckSquare, Square, Youtube, Bus, Video,
-  AlertTriangle, Banknote, UtensilsCrossed, Shield, BookOpen
+  Users, CheckSquare, Square, Youtube, BookOpen
 } from 'lucide-react';
 
 // ==========================================
@@ -199,7 +197,7 @@ const ITINERARY = [
       {
         time: "14:30",
         label: "西貢動物園",
-        note: "門票便宜，可餵長頸鹿",
+        note: "胡志明市唯一一個動物園",
         costVND: 60000,
         mapQuery: "Saigon Zoo and Botanical Garden",
         ytKeyword: "西貢動物園"
@@ -281,6 +279,13 @@ const DEFAULT_CHECKLIST = [
   "泳衣 / 泳具", "牙刷牙膏", "手機充電線 / 行動電源"
 ];
 
+const TAB_ITEMS = [
+  { id: 'itinerary', label: '行程安排', shortLabel: '行程', icon: Calendar, note: '每日動線與地圖捷徑' },
+  { id: 'tools', label: '工具與美食', shortLabel: '工具', icon: Utensils, note: '匯率、點餐、交通卡' },
+  { id: 'info', label: '行李建議', shortLabel: '行李', icon: ShoppingBag, note: '打包清單與提醒' },
+  { id: 'travel-notes', label: '注意事項', shortLabel: '注意', icon: BookOpen, note: '入境、交通、安全資訊' },
+];
+
 // ==========================================
 // 3. 子元件
 // ==========================================
@@ -294,7 +299,7 @@ const WeatherWidget = () => {
       .catch(e => console.error(e));
   }, []);
   return (
-    <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-white text-sm border border-white/20">
+    <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/15 px-3 py-1.5 text-sm text-white backdrop-blur-sm">
       {temp ? <>{temp > 30 ? <Sun className="w-4 h-4 text-yellow-300" /> : <CloudRain className="w-4 h-4 text-blue-200" />}<span>{temp}°C</span></> : <span>...</span>}
     </div>
   );
@@ -304,13 +309,16 @@ const WeatherWidget = () => {
 const CurrencyConverter = () => {
   const [vnd, setVnd] = useState('');
   return (
-    <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-5 text-white shadow-xl mb-6 relative overflow-hidden">
-      <div className="flex justify-between mb-4 relative z-10"><h3 className="font-bold flex gap-2"><Calculator className="w-5 h-5" /> 匯率換算</h3><span className="text-xs bg-white/20 px-2 py-1 rounded">1 TWD ≈ {EXCHANGE_RATE} VND</span></div>
-      <div className="space-y-3 relative z-10">
-        <input type="text" inputMode="numeric" value={vnd ? parseInt(vnd).toLocaleString() : ''} onChange={(e) => setVnd(e.target.value.replace(/,/g, ''))} className="w-full bg-black/20 border-white/30 rounded-xl px-3 py-4 text-2xl text-right text-white focus:outline-none placeholder-white/30" placeholder="輸入越盾 (VND)" />
-        <div className="bg-white text-teal-800 rounded-xl px-4 py-3 flex justify-between items-center"><span className="text-sm font-bold">約台幣 (TWD)</span><span className="text-2xl font-bold font-mono">{vnd ? Math.round(vnd / EXCHANGE_RATE).toLocaleString() : '0'}</span></div>
+    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-700 p-5 text-white shadow-xl sm:p-6">
+      <div className="relative z-10 mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <h3 className="flex items-center gap-2 font-bold"><Calculator className="w-5 h-5" /> 匯率換算</h3>
+        <span className="w-fit rounded-full bg-white/20 px-2.5 py-1 text-xs">1 TWD ≈ {EXCHANGE_RATE} VND</span>
       </div>
-      <div className="mt-4 flex justify-end gap-2 relative z-10">{[10000, 50000, 100000, 500000].map(amt => <button key={amt} onClick={() => setVnd(amt.toString())} className="text-[10px] bg-white/20 px-2 py-1 rounded">{amt / 1000}k</button>)}</div>
+      <div className="space-y-3 relative z-10">
+        <input type="text" inputMode="numeric" value={vnd ? parseInt(vnd).toLocaleString() : ''} onChange={(e) => setVnd(e.target.value.replace(/,/g, ''))} className="w-full rounded-2xl border border-white/30 bg-black/20 px-4 py-4 text-right text-xl text-white placeholder-white/30 focus:outline-none sm:text-2xl" placeholder="輸入越盾 (VND)" />
+        <div className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 text-teal-800"><span className="text-sm font-bold">約台幣 (TWD)</span><span className="font-mono text-2xl font-bold">{vnd ? Math.round(vnd / EXCHANGE_RATE).toLocaleString() : '0'}</span></div>
+      </div>
+      <div className="relative z-10 mt-4 flex flex-wrap justify-end gap-2">{[10000, 50000, 100000, 500000].map(amt => <button key={amt} onClick={() => setVnd(amt.toString())} className="rounded-full bg-white/20 px-3 py-1.5 text-[11px] font-medium">{amt / 1000}k</button>)}</div>
     </div>
   );
 };
@@ -322,8 +330,8 @@ const TaxiCardModal = ({ location, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 animate-fade-in" onClick={onClose}>
-      <div className="bg-white w-full max-w-sm rounded-3xl p-6 relative" onClick={e => e.stopPropagation()}>
-        <button onClick={onClose} className="absolute top-4 right-4 bg-gray-100 p-1 rounded-full"><X className="w-6 h-6 text-gray-500" /></button>
+      <div className="relative w-full max-w-lg rounded-[2rem] bg-white p-5 sm:p-6" onClick={e => e.stopPropagation()}>
+        <button onClick={onClose} className="absolute right-4 top-4 rounded-full bg-gray-100 p-1.5"><X className="w-6 h-6 text-gray-500" /></button>
         <h3 className="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6 text-center">請給司機看 (Show Driver)</h3>
         <div className="text-center py-6 border-y-2 border-teal-500 my-2">
           <h2 className="text-2xl font-extrabold text-teal-800 mb-4">{location.vnName}</h2>
@@ -355,14 +363,14 @@ const PackingList = () => {
   const progress = Math.round((items.filter(i => i.checked).length / items.length) * 100);
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-5 border-l-4 border-purple-400">
-      <div className="flex justify-between items-center mb-4">
+    <div className="rounded-3xl border border-purple-100 bg-white p-5 shadow-sm sm:p-6">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="font-bold text-gray-800 flex items-center gap-2"><ShoppingBag className="w-5 h-5 text-purple-500" /> 行李清單</h2>
-        <span className="text-xs font-bold text-purple-600 bg-purple-100 px-2 py-1 rounded-full">{progress}% 完成</span>
+        <span className="w-fit rounded-full bg-purple-100 px-3 py-1 text-xs font-bold text-purple-600">{progress}% 完成</span>
       </div>
-      <div className="space-y-2">
+      <div className="grid gap-2 md:grid-cols-2">
         {items.map((item, idx) => (
-          <div key={idx} onClick={() => toggle(idx)} className="flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg cursor-pointer">
+          <div key={idx} onClick={() => toggle(idx)} className="flex cursor-pointer items-center gap-3 rounded-xl p-3 transition-colors hover:bg-gray-50">
             {item.checked ? <CheckSquare className="w-5 h-5 text-purple-500" /> : <Square className="w-5 h-5 text-gray-300" />}
             <span className={`${item.checked ? 'text-gray-400 line-through' : 'text-gray-700'}`}>{item.name}</span>
           </div>
@@ -378,21 +386,21 @@ const PackingList = () => {
 const AccordionSection = ({ title, icon, children, defaultOpen = false }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <div className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+        className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors hover:bg-gray-50 sm:px-6"
       >
         <div className="flex items-center gap-3">
           {icon && <span className="text-xl">{icon}</span>}
-          <span className="font-bold text-gray-800">{title}</span>
+          <span className="font-bold text-gray-800 sm:text-base">{title}</span>
         </div>
         <ChevronDown
           className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
       {isOpen && (
-        <div className="px-5 pb-5 border-t border-gray-100 pt-4 animate-fade-in">
+        <div className="animate-fade-in border-t border-gray-100 px-5 pb-5 pt-4 sm:px-6 sm:pb-6">
           {children}
         </div>
       )}
@@ -400,19 +408,39 @@ const AccordionSection = ({ title, icon, children, defaultOpen = false }) => {
   );
 };
 
+const TabButton = ({ tab, active, onClick, mobile = false }) => {
+  const Icon = tab.icon;
+  return (
+    <button
+      onClick={onClick}
+      className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${
+        active
+          ? 'border-teal-200 bg-teal-50 text-teal-700 shadow-sm'
+          : 'border-transparent bg-white/70 text-slate-600 hover:border-slate-200 hover:bg-white'
+      } ${mobile ? 'min-w-[7.5rem] justify-center px-3 py-2.5' : 'w-full'}`}
+    >
+      <Icon className={`${mobile ? 'h-5 w-5' : 'h-5 w-5 flex-shrink-0'}`} />
+      <span className={`${mobile ? 'text-xs font-semibold' : 'min-w-0'}`}>
+        <span className="block font-semibold">{mobile ? tab.shortLabel : tab.label}</span>
+        {!mobile && <span className="mt-0.5 block text-xs text-slate-400">{tab.note}</span>}
+      </span>
+    </button>
+  );
+};
+
 // ==========================================
 // Travel Notes Page (旅遊注意事項)
 // ==========================================
 const TravelNotesPage = () => (
-  <div className="animate-fade-in space-y-4">
+  <div className="mx-auto max-w-5xl animate-fade-in space-y-5">
     <div className="text-center mb-2">
-      <h2 className="text-xl font-bold text-gray-800">📘 旅遊注意事項</h2>
+      <h2 className="text-xl font-bold text-gray-800 sm:text-2xl">📘 旅遊注意事項</h2>
       <p className="text-sm text-gray-500">點擊展開各項說明</p>
     </div>
 
     {/* 航班資訊 */}
     <AccordionSection title="航班資訊" icon="✈️">
-      <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2">
         <div className="bg-teal-50 rounded-xl p-4">
           <h4 className="font-bold text-teal-700 mb-2">🛫 去程</h4>
           <p className="text-sm text-gray-700 font-bold">高雄 → 胡志明市</p>
@@ -438,7 +466,7 @@ const TravelNotesPage = () => (
 
     {/* 行李檢查清單 */}
     <AccordionSection title="行李檢查清單" icon="🧳">
-      <div className="space-y-4">
+      <div className="grid gap-5 md:grid-cols-3">
         <div>
           <h4 className="font-bold text-gray-700 mb-2">📄 必備證件</h4>
           <p className="text-sm text-gray-500 mb-2">出發前確認：</p>
@@ -494,7 +522,7 @@ const TravelNotesPage = () => (
           <p className="text-sm text-red-600 mt-1">⚠️ 最後請確認海關有蓋「入境章」。</p>
         </div>
         <p className="text-sm text-gray-700">之後流程：</p>
-        <div className="flex items-center gap-2 text-sm text-teal-700 font-bold bg-teal-50 rounded-xl px-4 py-3">
+        <div className="flex flex-col gap-2 rounded-xl bg-teal-50 px-4 py-3 text-sm font-bold text-teal-700 sm:flex-row sm:flex-wrap sm:items-center">
           <span>移民審查</span><ChevronRight className="w-4 h-4" />
           <span>領行李</span><ChevronRight className="w-4 h-4" />
           <span>走出海關</span>
@@ -507,14 +535,14 @@ const TravelNotesPage = () => (
 
     {/* 當地交通 */}
     <AccordionSection title="當地交通" icon="🚕">
-      <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-3">
         <div className="bg-green-50 rounded-xl p-4">
           <h4 className="font-bold text-green-700 mb-2">🟢 Grab（最推薦）</h4>
           <p className="text-sm text-gray-700">越南版 Uber。</p>
           <p className="text-sm text-gray-700 mt-1">建議：<strong>提前下載 Grab app，並綁定好信用卡。</strong></p>
           <p className="text-sm text-gray-500 mt-1">可以叫：汽車、機車、外送</p>
         </div>
-        <div>
+        <div className="rounded-xl bg-gray-50 p-4">
           <h4 className="font-bold text-gray-700 mb-2">🚖 計程車</h4>
           <p className="text-sm text-gray-700">建議品牌：</p>
           <ul className="text-sm text-gray-700 mt-1 space-y-0.5">
@@ -551,7 +579,7 @@ const TravelNotesPage = () => (
 
     {/* 換錢攻略 */}
     <AccordionSection title="換錢攻略" icon="💰">
-      <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-3">
         <div className="bg-gray-50 rounded-xl p-4">
           <h4 className="font-bold text-gray-700 mb-1">方法 1：台灣先換</h4>
           <p className="text-sm text-gray-600">安全但匯率通常很差。</p>
@@ -572,8 +600,8 @@ const TravelNotesPage = () => (
             </ul>
           </div>
         </div>
-        <p className="text-sm text-gray-700">ℹ️ 推薦金店：https://share.google/SWm0ZalzGRY2asAQo</p>
       </div>
+      <p className="mt-4 text-sm text-gray-700">ℹ️ 推薦金店：https://share.google/SWm0ZalzGRY2asAQo</p>
     </AccordionSection>
 
     {/* 飲食注意事項 */}
@@ -623,30 +651,32 @@ const TravelNotesPage = () => (
     <AccordionSection title="防詐騙指南" icon="🚨">
       <div className="space-y-4">
         <p className="text-sm text-gray-500">常見觀光詐騙：</p>
-        <div className="bg-gray-50 rounded-xl p-4">
-          <h4 className="font-bold text-gray-700 mb-1">🚖 計程車繞路</h4>
-          <p className="text-sm text-gray-600">解法：只用 <strong>Grab</strong>訂車。</p>
-        </div>
-        <div className="bg-gray-50 rounded-xl p-4">
-          <h4 className="font-bold text-gray-700 mb-1">💲 被商家宰</h4>
-          <p className="text-sm text-gray-600">有些小店家可能會因為觀光客而抬高價格。</p>
-          <p className="text-sm text-red-600 mt-1">做法：<strong>永遠記得，一定要先問價格，並用手機/計算機按出來。這裡可能會按200，表示200K（20萬越盾）；50表示50K（5萬越盾），以此類推。</strong></p>
-        </div>
-        <div className="bg-gray-50 rounded-xl p-4">
-          <h4 className="font-bold text-gray-700 mb-1">💱 換錢詐騙</h4>
-          <p className="text-sm text-gray-600">避免：街頭換錢。只去：<strong>金店或銀行</strong>。</p>
-        </div>
-        <div className="bg-gray-50 rounded-xl p-4">
-          <h4 className="font-bold text-gray-700 mb-1">💆 按摩店詐騙</h4>
-          <p className="text-sm text-gray-600">有些店會強迫加價、收奇怪費用。</p>
-          <p className="text-sm text-teal-600 mt-1">建議：<strong>先確認價格。</strong>，絕對不要去門口被遮起來，或完全沒辦法從外面看到內部的店家。</p>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="font-bold text-gray-700 mb-1">🚖 計程車繞路</h4>
+            <p className="text-sm text-gray-600">解法：只用 <strong>Grab</strong>訂車。</p>
+          </div>
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="font-bold text-gray-700 mb-1">💲 被商家宰</h4>
+            <p className="text-sm text-gray-600">有些小店家可能會因為觀光客而抬高價格。</p>
+            <p className="text-sm text-red-600 mt-1">做法：<strong>永遠記得，一定要先問價格，並用手機/計算機按出來。這裡可能會按200，表示200K（20萬越盾）；50表示50K（5萬越盾），以此類推。</strong></p>
+          </div>
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="font-bold text-gray-700 mb-1">💱 換錢詐騙</h4>
+            <p className="text-sm text-gray-600">避免：街頭換錢。只去：<strong>金店或銀行</strong>。</p>
+          </div>
+          <div className="bg-gray-50 rounded-xl p-4">
+            <h4 className="font-bold text-gray-700 mb-1">💆 按摩店詐騙</h4>
+            <p className="text-sm text-gray-600">有些店會強迫加價、收奇怪費用。</p>
+            <p className="text-sm text-teal-600 mt-1">建議：<strong>先確認價格。</strong>，絕對不要去門口被遮起來，或完全沒辦法從外面看到內部的店家。</p>
+          </div>
         </div>
       </div>
     </AccordionSection>
 
     {/* 緊急聯絡資訊 */}
     <AccordionSection title="緊急聯絡資訊" icon="🆘">
-      <div className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-[minmax(0,1fr),minmax(0,1fr)]">
         <div className="bg-red-50 rounded-xl p-4">
           <h4 className="font-bold text-red-700 mb-2">越南緊急電話</h4>
           <div className="grid grid-cols-3 gap-3 text-center">
@@ -687,52 +717,110 @@ export default function App() {
   const openYoutube = (query) => window.open(getYoutubeLink(query), '_blank');
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans pb-24 md:pb-0">
+    <div className="min-h-screen bg-slate-100 text-slate-900 pb-24 md:pb-0">
       {/* Header */}
-      <header className="bg-teal-700 text-white px-5 py-4 sticky top-0 z-40 shadow-lg">
-        <div className="max-w-md mx-auto flex justify-between items-center">
-          <div>
-            <h1 className="font-bold text-xl flex items-center gap-2 tracking-tight">
+      <header className="sticky top-0 z-40 border-b border-teal-900/10 bg-gradient-to-r from-teal-700 via-teal-600 to-cyan-600 text-white shadow-lg">
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.25em] text-white/80">
+                Ho Chi Minh City Trip
+              </div>
+              <h1 className="font-bold text-2xl flex items-center gap-2 tracking-tight sm:text-3xl">
               <Plane className="w-5 h-5 transform -rotate-45 text-teal-300" /> 胡志明自由行
-            </h1>
-            <div className="flex items-center gap-2 text-xs text-teal-100/80 mt-0.5">
-              <Calendar className="w-3 h-3" /> 2026/3/17-21 <span className="w-1 h-1 bg-teal-300 rounded-full"></span> <Users className="w-3 h-3" /> 13人
+              </h1>
+              <p className="mt-2 max-w-2xl text-sm text-teal-50/90 sm:text-base">
+                手機優先的旅遊助手，現在也會在平板與桌面寬度下自動展開更寬鬆的資訊布局。
+              </p>
+              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs text-teal-100/90 sm:text-sm">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5"><Calendar className="h-3.5 w-3.5" /> 2026/3/17-21</span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5"><Users className="h-3.5 w-3.5" /> 13人同行</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 self-start md:self-auto">
+              <WeatherWidget />
             </div>
           </div>
-          <WeatherWidget />
+
+          <div className="hidden gap-3 overflow-x-auto pb-1 md:flex lg:hidden">
+            {TAB_ITEMS.map((tab) => (
+              <TabButton
+                key={tab.id}
+                tab={tab}
+                active={activeTab === tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                mobile
+              />
+            ))}
+          </div>
         </div>
       </header>
 
-      <main className="max-w-md mx-auto p-4 space-y-4">
-        {/* TAB 1: 行程 */}
-        {activeTab === 'itinerary' && (
-          <div className="animate-fade-in space-y-3">
+      <main className="mx-auto grid w-full max-w-7xl gap-6 px-4 pb-8 pt-4 sm:px-6 lg:grid-cols-[18rem,minmax(0,1fr)] lg:px-8 lg:pt-6">
+        <aside className="hidden lg:block">
+          <div className="sticky top-28 space-y-4">
+            <div className="rounded-3xl bg-gradient-to-br from-slate-900 to-slate-800 p-5 text-white shadow-xl">
+              <p className="text-xs uppercase tracking-[0.25em] text-teal-200">旅程總覽</p>
+              <h2 className="mt-2 text-2xl font-bold">5 天 4 夜</h2>
+              <p className="mt-2 text-sm text-slate-300">手機保留底部導覽，桌面改成固定側欄，切換分頁時不需要回到底部。</p>
+              <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                <div className="rounded-2xl bg-white/10 p-3">
+                  <div className="text-slate-300">主要區域</div>
+                  <div className="mt-1 font-semibold">第一郡 / 第五郡</div>
+                </div>
+                <div className="rounded-2xl bg-white/10 p-3">
+                  <div className="text-slate-300">重點</div>
+                  <div className="mt-1 font-semibold">美食 + 親子動線</div>
+                </div>
+              </div>
+            </div>
+
+            <nav className="rounded-3xl border border-slate-200 bg-white p-3 shadow-sm">
+              <div className="mb-3 px-2 text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Sections</div>
+              <div className="space-y-2">
+                {TAB_ITEMS.map((tab) => (
+                  <TabButton
+                    key={tab.id}
+                    tab={tab}
+                    active={activeTab === tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                  />
+                ))}
+              </div>
+            </nav>
+          </div>
+        </aside>
+
+        <section className="min-w-0 space-y-4">
+          {/* TAB 1: 行程 */}
+          {activeTab === 'itinerary' && (
+            <div className="animate-fade-in grid gap-4 xl:grid-cols-2">
             {ITINERARY.map((day) => (
-              <div key={day.day} className="bg-white rounded-3xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+              <div key={day.day} className="overflow-hidden rounded-3xl bg-white shadow-sm transition-all duration-300 hover:shadow-md">
                 {/* Day Header */}
                 <button
                   onClick={() => setOpenDay(openDay === day.day ? null : day.day)}
-                  className="w-full p-5 flex items-center justify-between active:scale-[0.99] transition-transform"
+                  className="flex w-full items-start justify-between gap-3 p-5 text-left transition-transform active:scale-[0.99] sm:items-center sm:p-6"
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center shadow-lg shadow-teal-500/20">
+                  <div className="flex min-w-0 items-start gap-4 sm:items-center">
+                    <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg shadow-teal-500/20 sm:h-16 sm:w-16">
                       <div className="text-center">
                         <div className="text-[10px] font-semibold text-teal-100 uppercase tracking-wide">Day</div>
                         <div className="text-2xl font-bold text-white leading-none">{day.day}</div>
                       </div>
                     </div>
-                    <div className="flex-1 text-left">
-                      <h3 className="font-semibold text-gray-900 text-base leading-tight mb-0.5">{day.title}</h3>
+                    <div className="min-w-0 flex-1 text-left">
+                      <h3 className="mb-0.5 text-base font-semibold leading-tight text-gray-900 sm:text-lg">{day.title}</h3>
                       <p className="text-xs text-gray-400 font-medium">{day.date}</p>
-                      <p className="text-[11px] text-gray-400 mt-0.5">{day.desc}</p>
+                      <p className="mt-0.5 text-[11px] text-gray-400 sm:text-xs">{day.desc}</p>
                     </div>
                   </div>
-                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform duration-300 flex-shrink-0 ml-2 ${openDay === day.day ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`ml-2 h-5 w-5 flex-shrink-0 text-gray-400 transition-transform duration-300 ${openDay === day.day ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Day Content */}
                 {openDay === day.day && (
-                  <div className="px-5 pb-5 pt-1 bg-gradient-to-b from-gray-50/50 to-white">
+                  <div className="bg-gradient-to-b from-gray-50/50 to-white px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
                     <div className="space-y-5">
                       {day.details.map((item, idx) => (
                         <div key={idx} className="relative">
@@ -742,22 +830,22 @@ export default function App() {
                           )}
 
                           {/* Activity Card */}
-                          <div className="flex gap-4">
+                          <div className="flex gap-3 sm:gap-4">
                             {/* Time indicator */}
                             <div className="flex-shrink-0 pt-1">
-                              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-500 shadow-lg shadow-teal-500/25 flex items-center justify-center">
+                              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-teal-500 shadow-lg shadow-teal-500/25">
                                 <span className="text-white text-xs font-bold">{item.time.split(':')[0]}<span className="text-[8px]">:{item.time.split(':')[1]}</span></span>
                               </div>
                             </div>
 
                             {/* Content */}
-                            <div className="flex-1 bg-white rounded-2xl p-4 shadow-sm border border-gray-100/50">
+                            <div className="flex-1 rounded-2xl border border-gray-100/50 bg-white p-4 shadow-sm">
                               {/* Title & Cost */}
-                              <div className="flex justify-between items-start mb-2">
-                                <h4 className="font-semibold text-gray-900 text-[15px] leading-tight flex-1">{item.label}</h4>
+                              <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                                <h4 className="flex-1 text-[15px] font-semibold leading-tight text-gray-900">{item.label}</h4>
                                 {item.costVND !== 0 && (
-                                  <div className="ml-3 flex-shrink-0">
-                                    <div className="text-right">
+                                  <div className="flex-shrink-0 sm:ml-3">
+                                    <div className="text-left sm:text-right">
                                       <div className="text-xs font-bold text-teal-600">
                                         ${item.fixedTwd || Math.round(item.costVND / EXCHANGE_RATE)}
                                       </div>
@@ -771,17 +859,17 @@ export default function App() {
                               <p className="text-sm text-gray-500 leading-relaxed mb-3">{item.note}</p>
 
                               {/* Action Buttons */}
-                              <div className="flex gap-2">
+                              <div className="flex flex-wrap gap-2">
                                 <button
                                   onClick={(e) => { e.stopPropagation(); openMap(item.mapQuery); }}
-                                  className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-blue-600 px-3 py-1.5 rounded-full hover:bg-blue-50 transition-colors"
+                                  className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600"
                                 >
                                   <Map className="w-3.5 h-3.5" />
                                   <span className="font-medium">導航</span>
                                 </button>
                                 <button
                                   onClick={(e) => { e.stopPropagation(); openYoutube(item.ytKeyword); }}
-                                  className="flex items-center gap-1.5 text-xs text-gray-600 hover:text-red-600 px-3 py-1.5 rounded-full hover:bg-red-50 transition-colors"
+                                  className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs text-gray-600 transition-colors hover:bg-red-50 hover:text-red-600"
                                 >
                                   <Youtube className="w-3.5 h-3.5" />
                                   <span className="font-medium">影片</span>
@@ -796,25 +884,27 @@ export default function App() {
                 )}
               </div>
             ))}
-          </div>
-        )}
+            </div>
+          )}
 
-        {/* TAB 2: 工具 */}
-        {activeTab === 'tools' && (
-          <div className="animate-fade-in space-y-6">
-            <CurrencyConverter />
+          {/* TAB 2: 工具 */}
+          {activeTab === 'tools' && (
+            <div className="animate-fade-in grid gap-6 xl:grid-cols-2">
+              <div className="xl:col-span-2">
+                <CurrencyConverter />
+              </div>
 
-            {/* 點餐手指通 (新版) */}
-            <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
-              <h2 className="font-bold text-gray-800 mb-4 flex items-center gap-2"><Utensils className="w-5 h-5 text-teal-600" /> 美食圖鑑 & 點餐</h2>
-              <div className="grid gap-3">
+              {/* 點餐手指通 (新版) */}
+              <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6">
+                <h2 className="mb-4 flex items-center gap-2 font-bold text-gray-800"><Utensils className="w-5 h-5 text-teal-600" /> 美食圖鑑 & 點餐</h2>
+                <div className="grid gap-3 sm:grid-cols-2">
                 {FOOD_MENU.map((f, idx) => (
-                  <div key={idx} className="border border-gray-100 p-3 rounded-xl flex items-start gap-3 hover:bg-orange-50 cursor-pointer transition-colors" onClick={() => playAudio(f.vn)}>
-                    <div className="text-4xl bg-gray-50 w-16 h-16 flex items-center justify-center rounded-lg">{f.icon}</div>
+                  <div key={idx} className="flex cursor-pointer items-start gap-3 rounded-2xl border border-gray-100 p-3 transition-colors hover:bg-orange-50" onClick={() => playAudio(f.vn)}>
+                    <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-xl bg-gray-50 text-4xl">{f.icon}</div>
                     <div className="flex-1">
-                      <div className="flex justify-between items-start">
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                         <h3 className="font-bold text-gray-800">{f.name}</h3>
-                        <div className="text-right">
+                        <div className="text-left sm:text-right">
                           <span className="block text-xs font-bold text-teal-600">{formatPrice(f.price)}</span>
                         </div>
                       </div>
@@ -823,64 +913,76 @@ export default function App() {
                     </div>
                   </div>
                 ))}
+                </div>
               </div>
-            </div>
 
-            <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
-              <h2 className="font-bold text-gray-800 mb-4 flex items-center gap-2"><Navigation className="w-5 h-5 text-teal-600" /> 計程車卡 (含導航)</h2>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6">
+                <h2 className="mb-4 flex items-center gap-2 font-bold text-gray-800"><Navigation className="w-5 h-5 text-teal-600" /> 計程車卡 (含導航)</h2>
+                <div className="grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
                 {LOCATIONS.map((loc, idx) => (
-                  <button key={idx} onClick={() => setSelectedLocation(loc)} className="p-3 bg-gray-50 hover:bg-teal-50 border border-gray-200 rounded-xl text-left active:scale-95 transition-all">
-                    <div className="font-bold text-gray-700 text-sm truncate">{loc.name}</div>
-                    <div className="text-[10px] text-gray-400 truncate mt-0.5">{loc.vnName}</div>
+                  <button key={idx} onClick={() => setSelectedLocation(loc)} className="rounded-2xl border border-gray-200 bg-gray-50 p-3 text-left transition-all hover:bg-teal-50 active:scale-95">
+                    <div className="text-sm font-bold text-gray-700">{loc.name}</div>
+                    <div className="mt-1 text-[10px] leading-relaxed text-gray-400">{loc.vnName}</div>
                   </button>
                 ))}
+                </div>
               </div>
-            </div>
 
-            {/* 常用語音 */}
-            <div className="bg-white rounded-2xl shadow-sm p-5 border border-gray-100">
-              <h2 className="font-bold text-gray-800 mb-4 flex items-center gap-2"><Languages className="w-5 h-5 text-teal-600" /> 常用語音</h2>
-              <div className="grid grid-cols-2 gap-3">
+              {/* 常用語音 */}
+              <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm sm:p-6 xl:col-span-2">
+                <h2 className="mb-4 flex items-center gap-2 font-bold text-gray-800"><Languages className="w-5 h-5 text-teal-600" /> 常用語音</h2>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {[
                   { ch: "你好", vn: "Xin chào" }, { ch: "謝謝", vn: "Cảm ơn" },
                   { ch: "買單", vn: "Tính tiền" }, { ch: "太貴了", vn: "Mắc quá" },
                   { ch: "不要加冰", vn: "Không đá" }, { ch: "廁所?", vn: "Toilet?" }
                 ].map((p, i) => (
-                  <button key={i} onClick={() => playAudio(p.vn)} className="p-3 border border-gray-100 rounded-xl flex justify-between items-center hover:bg-gray-50">
+                  <button key={i} onClick={() => playAudio(p.vn)} className="flex items-center justify-between rounded-2xl border border-gray-100 p-3 hover:bg-gray-50">
                     <span className="text-sm font-bold text-gray-700">{p.ch}</span>
                     <Volume2 className="w-4 h-4 text-teal-500" />
                   </button>
                 ))}
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* TAB 3: 資訊 */}
-        {activeTab === 'info' && (
-          <div className="animate-fade-in space-y-6">
-            <PackingList />
+          {/* TAB 3: 資訊 */}
+          {activeTab === 'info' && (
+            <div className="animate-fade-in grid gap-6 xl:grid-cols-[minmax(0,1fr),20rem]">
+              <PackingList />
 
-            <div className="bg-red-50 rounded-2xl shadow-sm p-5 border border-red-100">
-              <h2 className="font-bold text-red-700 mb-2 flex items-center gap-2">注意</h2>
-              <div className="text-sm space-y-2 text-red-800">
-                <p>請依照個人需求準備行李，特別是醫藥品、清潔用品、過敏藥等等。</p>
+              <div className="rounded-3xl border border-red-100 bg-red-50 p-5 shadow-sm sm:p-6">
+                <h2 className="mb-2 flex items-center gap-2 font-bold text-red-700">注意</h2>
+                <div className="space-y-3 text-sm text-red-800">
+                  <p>請依照個人需求準備行李，特別是醫藥品、清潔用品、過敏藥等等。</p>
+                  <p>平板與桌面版會把清單拆成雙欄，手機維持單列，勾選區域也更好點擊。</p>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* TAB 4: 旅遊注意事項 */}
-        {activeTab === 'travel-notes' && <TravelNotesPage />}
+          {/* TAB 4: 旅遊注意事項 */}
+          {activeTab === 'travel-notes' && <TravelNotesPage />}
+        </section>
       </main>
 
       {/* 底部導覽 */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 pb-safe pt-2 px-4 flex justify-around md:hidden z-50">
-        <button onClick={() => setActiveTab('itinerary')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'itinerary' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Calendar className="w-6 h-6" /><span className="text-[10px] font-medium">行程</span></button>
-        <button onClick={() => setActiveTab('tools')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'tools' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><Utensils className="w-6 h-6" /><span className="text-[10px] font-medium">工具/美食</span></button>
-        <button onClick={() => setActiveTab('info')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'info' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><ShoppingBag className="w-6 h-6" /><span className="text-[10px] font-medium">行李建議</span></button>
-        <button onClick={() => setActiveTab('travel-notes')} className={`flex flex-col items-center w-16 p-2 rounded-xl ${activeTab === 'travel-notes' ? 'text-teal-600 bg-teal-50' : 'text-gray-400'}`}><BookOpen className="w-6 h-6" /><span className="text-[10px] font-medium">注意事項</span></button>
+      <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-around border-t border-gray-200 bg-white/95 px-3 pb-safe pt-2 backdrop-blur-md md:hidden">
+        {TAB_ITEMS.map((tab) => {
+          const Icon = tab.icon;
+          const active = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex w-[4.5rem] flex-col items-center rounded-2xl px-2 py-2.5 ${active ? 'bg-teal-50 text-teal-600' : 'text-gray-400'}`}
+            >
+              <Icon className="h-5 w-5" />
+              <span className="mt-1 text-[10px] font-medium">{tab.shortLabel}</span>
+            </button>
+          );
+        })}
       </div>
 
       {selectedLocation && <TaxiCardModal location={selectedLocation} onClose={() => setSelectedLocation(null)} />}
