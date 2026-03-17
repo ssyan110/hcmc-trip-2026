@@ -762,6 +762,7 @@ export default function App() {
               <p className="text-xs uppercase tracking-[0.25em] text-teal-200">旅程總覽</p>
               <h2 className="mt-2 text-2xl font-bold">5 天 4 夜</h2>
               <p className="mt-2 text-sm text-slate-300">行程、餐廳可能會因大家討論後而有所改變。</p>
+              <p className="mt-2 text-sm text-slate-300">所有APP中的價格都是預估，並非實際價格。</p>
               <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
                 <div className="rounded-2xl bg-white/10 p-3">
                   <div className="text-slate-300">主要區域</div>
